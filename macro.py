@@ -8,6 +8,8 @@ import itertools
 import paramiko
 import os
 import time
+from telnet_func import telnet_vz
+from ssh_func import ssh_vz
 
 
 with open ('just_ip_cat2.csv','rb') as t:
