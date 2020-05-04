@@ -31,8 +31,8 @@ print '\n'
 print cmd_list
 print '\n'
 
-user = 'amersp-wilszr'
-pw = 'tYkd37wW'
+user = ''
+pw = ''
 
 #def telnet_vz(ip):
 #
@@ -42,7 +42,7 @@ pw = 'tYkd37wW'
 #
 #    if pw:
 #        t.read_until(b"Password:")
-#        t.write(pw.encode("ascii") + b"\n")
+#        t.write(pw.encode("ascii") + b"\n")cd
 #        print '\n***** TELNET connection successfull to ' + ip + ' ***** \n'
 #
 #    for c in cmd_list:
