@@ -9,27 +9,29 @@ def telnet_vz(ip):
     password of the user. 
     """
 
-    t = telnetlib.Telnet(ip)
-    t.read_until(b"Username:")
-    t.write(user.encode("ascii") + b"\n")
+	t = telnetlib.Telnet(ip)
+	t.read_until(b"Username:")
+	t.write(user.encode("ascii") + b"\n")
 
-    if pw:
-        t.read_until(b"Password:")
-        t.write(pw.encode("ascii") + b"\n")
-        print '\n***** TELNET connection successfull to ' + ip + ' ***** \n'
+	if pw:
+		t.read_until(b"Password:")
+		t.write(pw.encode("ascii") + b"\n")
+		print '\n***** TELNET connection successfull to ' + ip + ' ***** \n'
 
-    for c in cmd_list:
-        t.write(c + "\n")
+	for c in cmd_list:
+		t.write(c + "\n")
 
-    t.write(b"exit\n")
+	t.write(b"exit\n")
 
-    text = t.read_all()
+	text = t.read_all()
 
-    print text
-    print ('\n' + '=' * 120 + '\n')
+	print text
+	print ('\n' + '=' * 120 + '\n')
 
-    f = open(output_text,'a')
-    f.write('\n***** TELNET connection to ' + ip + ' ***** \n')
-    f.write(text) 
-    f.write('\n' + '=' * 120 + '\n')
-    f.close()
+	f = open(output_text,'a')
+	f.write('\n***** TELNET connection to ' + ip + ' ***** \n')
+	f.write(text) 
+	f.write('\n' + '=' * 120 + '\n')
+	f.close()
+
+

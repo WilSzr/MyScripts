@@ -32,7 +32,7 @@ print cmd_list
 print '\n'
 
 user = 'amersp-wilszr'
-pw = 'AmerMar2020.'
+pw = 'tYkd37wW'
 
 #def telnet_vz(ip):
 #
@@ -93,23 +93,23 @@ pw = 'AmerMar2020.'
 
 def main():
 
-    for ip in flat_list:
-    
-        try:    
-            print ip + ' TELNET'
-            telnet_vz(ip)
-
-        except :
-            try:
-                print ip + ' SSH'
-                ssh_vz(ip)      
-
-            except:
-                print ('\n***** No connection to ' + ip + ' ***** \n')
-                f = open(output_text,'a')
-                f.write('\n***** No connection to ' + ip + ' ***** \n')
-                f.write('\n' + '=' * 120 + '\n')
-                f.close()
+	for ip in flat_list:
+	
+		try:    
+			print ip + ' TELNET'
+			telnet_vz(ip)
+		
+		except:
+			try:
+				print ip + ' SSH'
+				ssh_vz(ip)      
+			
+			except:
+				print ('\n***** No connection to ' + ip + ' ***** \n')
+				f = open(output_text,'a')
+				f.write('\n***** No connection to ' + ip + ' ***** \n')
+				f.write('\n' + '=' * 120 + '\n')
+				f.close()
 
 if __name__ == '__main__':
     main()
