@@ -1,8 +1,6 @@
 #!usr/bin/env python
 
 import csv
-import telnetlib
-import getpass
 import sys
 import itertools
 import paramiko
@@ -31,8 +29,8 @@ print '\n'
 print cmd_list
 print '\n'
 
-user = ''
-pw = ''
+user = 'amersp-wilszr'
+pw = 'AmerspMay2020.'
 
 #def telnet_vz(ip):
 #
@@ -42,7 +40,7 @@ pw = ''
 #
 #    if pw:
 #        t.read_until(b"Password:")
-#        t.write(pw.encode("ascii") + b"\n")cd
+#        t.write(pw.encode("ascii") + b"\n")
 #        print '\n***** TELNET connection successfull to ' + ip + ' ***** \n'
 #
 #    for c in cmd_list:

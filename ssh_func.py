@@ -2,6 +2,12 @@
 
 # SSH function that expects to get passed the ip address of the device to connect
 
+import paramiko
+import getpass
+import time
+import os
+import sys
+
 def ssh_vz(ip):
 
     """

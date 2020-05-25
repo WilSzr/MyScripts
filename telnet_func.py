@@ -2,6 +2,10 @@
 
 # Telnet function that expects to get passed the ip address of the device to connect
 
+import telnetlib
+import sys
+import os
+
 def telnet_vz(ip):
 
 	"""
