@@ -5,8 +5,9 @@
 import telnetlib
 import sys
 import os
+import time
 
-def telnet_vz(ip):
+def telnet_vz(ip,user,pw,cmd_list,output_text):
 
 	"""
     This fuction needs the IP addresses to be passed as well as the username and 

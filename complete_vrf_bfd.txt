@@ -768,3 +768,772 @@ amersp-chi02-19353801>exit
 ***** No connection to 10.255.225.17 ***** 
 
 ========================================================================================================================
+
+***** No connection to 10.255.225.9 ***** 
+
+========================================================================================================================
+
+***** No connection to 10.255.225.13 ***** 
+
+========================================================================================================================
+
+***** No connection to 10.255.228.5 ***** 
+
+========================================================================================================================
+
+***** No connection to 10.255.228.237 ***** 
+
+========================================================================================================================
+
+***** No connection to 10.255.225.93 ***** 
+
+========================================================================================================================
+
+***** No connection to 10.255.225.17 ***** 
+
+========================================================================================================================
+
+***** No connection to 10.255.225.9 ***** 
+
+========================================================================================================================
+
+***** No connection to 10.255.225.13 ***** 
+
+========================================================================================================================
+
+***** No connection to 10.255.228.5 ***** 
+
+========================================================================================================================
+
+***** No connection to 10.255.228.237 ***** 
+
+========================================================================================================================
+
+***** No connection to 10.255.225.93 ***** 
+
+========================================================================================================================
+
+***** No connection to 10.255.225.17 ***** 
+
+========================================================================================================================
+
+***** SSH connection to 10.255.225.9 ***** 
+
+amersp-ncy01-3221471>show ip vrf
+  Name                             Default RD            Interfaces
+  INET                             1:666                 Gi0/2
+amersp-ncy01-3221471>show conf | sec bfd
+ bfd interval 999 min_rx 999 multiplier 3
+ neighbor 152.183.150.65 fall-over bfd
+amersp-ncy01-3221471>show bfd neighbor
+
+IPv4 Sessions
+NeighAddr                              LD/RD         RH/RS     State     Int
+152.183.150.65                          1/882640     Up        Up        Gi0/0
+amersp-ncy01-3221471>exit
+
+========================================================================================================================
+
+***** SSH connection to 10.255.225.13 ***** 
+
+amersp-ncy02-3288665>show ip vrf
+  Name                             Default RD            Interfaces
+  INET                             1:666                 Gi0/2
+amersp-ncy02-3288665>show conf | sec bfd
+ bfd interval 999 min_rx 999 multiplier 3
+ neighbor 68.137.176.1 fall-over bfd
+amersp-ncy02-3288665>show bfd neighbor
+
+IPv4 Sessions
+NeighAddr                              LD/RD         RH/RS     State     Int
+68.137.176.1                            1/2147811434 Up        Up        Gi0/0
+amersp-ncy02-3288665>exit
+
+========================================================================================================================
+
+***** No connection to 10.255.228.5 ***** 
+
+========================================================================================================================
+
+***** SSH connection to 10.255.228.237 ***** 
+
+
+amersp-chi02-19353801>show ip vrf
+  Name                             Default RD            Interfaces
+  INET                             1:666                 Gi0/2
+amersp-chi02-19353801>show conf | sec bfd
+ bfd interval 999 min_rx 999 multiplier 3
+ neighbor 147.225.69.237 fall-over bfd
+amersp-chi02-19353801>show bfd neighbor
+
+IPv4 Sessions
+NeighAddr                              LD/RD         RH/RS     State     Int
+147.225.69.237                          1/44576      Up        Up        Gi0/0
+amersp-chi02-19353801>exit
+
+========================================================================================================================
+
+***** No connection to 10.255.225.93 ***** 
+
+========================================================================================================================
+
+***** No connection to 10.255.225.17 ***** 
+
+========================================================================================================================
+
+***** SSH connection to 10.255.225.9 ***** 
+
+amersp-ncy01-3221471>show ip vrf
+  Name                             Default RD            Interfaces
+  INET                             1:666                 Gi0/2
+amersp-ncy01-3221471>show conf | sec bfd
+ bfd interval 999 min_rx 999 multiplier 3
+ neighbor 152.183.150.65 fall-over bfd
+amersp-ncy01-3221471>show bfd neighbor
+
+IPv4 Sessions
+NeighAddr                              LD/RD         RH/RS     State     Int
+152.183.150.65                          1/882640     Up        Up        Gi0/0
+amersp-ncy01-3221471>exit
+
+========================================================================================================================
+
+***** SSH connection to 10.255.225.13 ***** 
+
+amersp-ncy02-3288665>show ip vrf
+  Name                             Default RD            Interfaces
+  INET                             1:666                 Gi0/2
+amersp-ncy02-3288665>show conf | sec bfd
+ bfd interval 999 min_rx 999 multiplier 3
+ neighbor 68.137.176.1 fall-over bfd
+amersp-ncy02-3288665>show bfd neighbor
+
+IPv4 Sessions
+NeighAddr                              LD/RD         RH/RS     State     Int
+68.137.176.1                            1/2147811434 Up        Up        Gi0/0
+amersp-ncy02-3288665>exit
+
+========================================================================================================================
+
+***** TELNET connection to 10.255.228.5 ***** 
+ 
+Authentication succeeded. Your password will expire in 3 weeks + 6 days  + 1 hours  + 31 Minutes  
+
+amersp-sch01-3380973>show ip vrf
+  Name                             Default RD            Interfaces
+  INET                             1:666                 Gi0/2
+amersp-sch01-3380973>show conf | sec bfd
+ bfd interval 999 min_rx 999 multiplier 3
+ neighbor 68.136.33.113 fall-over bfd
+amersp-sch01-3380973>show bfd neighbor
+
+IPv4 Sessions
+NeighAddr                              LD/RD         RH/RS     State     Int
+68.136.33.113                           1/2148270090 Up        Up        Gi0/0
+amersp-sch01-3380973>exit
+
+========================================================================================================================
+
+***** SSH connection to 10.255.228.237 ***** 
+
+amersp-chi02-19353801>show ip vrf
+  Name                             Default RD            Interfaces
+  INET                             1:666                 Gi0/2
+amersp-chi02-19353801>show conf | sec bfd
+ bfd interval 999 min_rx 999 multiplier 3
+ neighbor 147.225.69.237 fall-over bfd
+amersp-chi02-19353801>show bfd neighbor
+
+IPv4 Sessions
+NeighAddr                              LD/RD         RH/RS     State     Int
+147.225.69.237                          1/44576      Up        Up        Gi0/0
+amersp-chi02-19353801>exit
+
+========================================================================================================================
+
+***** TELNET connection to 10.255.225.93 ***** 
+ 
+Authentication succeeded. Your password will expire in 3 weeks + 6 days  + 1 hours  + 30 Minutes  
+
+amersp-irv01-3356835>show ip vrf
+  Name                             Default RD            Interfaces
+  GuestWLAN                        1:100                 Vl100
+amersp-irv01-3356835>show conf | sec bfd
+ bfd interval 999 min_rx 999 multiplier 3
+ neighbor 68.138.174.233 fall-over bfd
+amersp-irv01-3356835>show bfd neighbor
+
+IPv4 Sessions
+NeighAddr                              LD/RD         RH/RS     State     Int
+68.138.174.233                          1/222039     Up        Up        Gi0/0
+amersp-irv01-3356835>exit
+
+========================================================================================================================
+
+***** TELNET connection to 10.255.225.17 ***** 
+ 
+Authentication succeeded. Your password will expire in 3 weeks + 6 days  + 1 hours  + 30 Minutes  
+
+amersp-lhr01-3203227>show ip vrf
+amersp-lhr01-3203227>show conf | sec bfd
+ bfd interval 999 min_rx 999 multiplier 3
+ neighbor 147.225.166.233 fall-over bfd
+amersp-lhr01-3203227>show bfd neighbor
+
+IPv4 Sessions
+NeighAddr                              LD/RD         RH/RS     State     Int
+147.225.166.233                         1/6483       Up        Up        Gi0/0
+amersp-lhr01-3203227>exit
+
+========================================================================================================================
+
+***** SSH connection to 10.255.225.9 ***** 
+
+amersp-ncy01-3221471>show ip vrf
+  Name                             Default RD            Interfaces
+  INET                             1:666                 Gi0/2
+amersp-ncy01-3221471>show conf | sec bfd
+ bfd interval 999 min_rx 999 multiplier 3
+ neighbor 152.183.150.65 fall-over bfd
+amersp-ncy01-3221471>show bfd neighbor
+
+IPv4 Sessions
+NeighAddr                              LD/RD         RH/RS     State     Int
+152.183.150.65                          1/882640     Up        Up        Gi0/0
+amersp-ncy01-3221471>exit
+
+========================================================================================================================
+
+***** SSH connection to 10.255.225.13 ***** 
+
+amersp-ncy02-3288665>show ip vrf
+  Name                             Default RD            Interfaces
+  INET                             1:666                 Gi0/2
+amersp-ncy02-3288665>show conf | sec bfd
+ bfd interval 999 min_rx 999 multiplier 3
+ neighbor 68.137.176.1 fall-over bfd
+amersp-ncy02-3288665>show bfd neighbor
+
+IPv4 Sessions
+NeighAddr                              LD/RD         RH/RS     State     Int
+68.137.176.1                            1/2147811434 Up        Up        Gi0/0
+amersp-ncy02-3288665>exit
+
+========================================================================================================================
+
+***** No connection to 10.255.228.5 ***** 
+
+========================================================================================================================
+
+***** SSH connection to 10.255.228.237 ***** 
+
+amersp-chi02-19353801>show ip vrf
+  Name                             Default RD            Interfaces
+  INET                             1:666                 Gi0/2
+amersp-chi02-19353801>show conf | sec bfd
+ bfd interval 999 min_rx 999 multiplier 3
+ neighbor 147.225.69.237 fall-over bfd
+amersp-chi02-19353801>show bfd neighbor
+
+IPv4 Sessions
+NeighAddr                              LD/RD         RH/RS     State     Int
+147.225.69.237                          1/44576      Up        Up        Gi0/0
+amersp-chi02-19353801>exit
+
+========================================================================================================================
+
+***** No connection to 10.255.225.93 ***** 
+
+========================================================================================================================
+
+***** No connection to 10.255.225.17 ***** 
+
+========================================================================================================================
+
+***** SSH connection to 10.255.225.9 ***** 
+
+amersp-ncy01-3221471>show ip vrf
+  Name                             Default RD            Interfaces
+  INET                             1:666                 Gi0/2
+amersp-ncy01-3221471>show conf | sec bfd
+ bfd interval 999 min_rx 999 multiplier 3
+ neighbor 152.183.150.65 fall-over bfd
+amersp-ncy01-3221471>show bfd neighbor
+
+IPv4 Sessions
+NeighAddr                              LD/RD         RH/RS     State     Int
+152.183.150.65                          1/882640     Up        Up        Gi0/0
+amersp-ncy01-3221471>exit
+
+========================================================================================================================
+
+***** SSH connection to 10.255.225.13 ***** 
+
+amersp-ncy02-3288665>show ip vrf
+  Name                             Default RD            Interfaces
+  INET                             1:666                 Gi0/2
+amersp-ncy02-3288665>show conf | sec bfd
+ bfd interval 999 min_rx 999 multiplier 3
+ neighbor 68.137.176.1 fall-over bfd
+amersp-ncy02-3288665>show bfd neighbor
+
+IPv4 Sessions
+NeighAddr                              LD/RD         RH/RS     State     Int
+68.137.176.1                            1/2147811434 Up        Up        Gi0/0
+amersp-ncy02-3288665>exit
+
+========================================================================================================================
+
+***** No connection to 10.255.228.5 ***** 
+
+========================================================================================================================
+
+***** No connection to 10.255.228.237 ***** 
+
+========================================================================================================================
+
+***** No connection to 10.255.225.93 ***** 
+
+========================================================================================================================
+
+***** No connection to 10.255.225.17 ***** 
+
+========================================================================================================================
+
+***** TELNET connection to 10.255.228.5 ***** 
+ 
+Authentication succeeded. Your password will expire in 3 weeks + 6 days  + 1 hours  + 7 Minutes  
+
+amersp-sch01-3380973>show ip vrf
+  Name                             Default RD            Interfaces
+  INET                             1:666                 Gi0/2
+amersp-sch01-3380973>show conf | sec bfd
+ bfd interval 999 min_rx 999 multiplier 3
+ neighbor 68.136.33.113 fall-over bfd
+amersp-sch01-3380973>show bfd neighbor
+
+IPv4 Sessions
+NeighAddr                              LD/RD         RH/RS     State     Int
+68.136.33.113                           1/2148270090 Up        Up        Gi0/0
+amersp-sch01-3380973>exit
+
+========================================================================================================================
+
+***** TELNET connection to 10.255.228.5 ***** 
+ 
+Authentication succeeded. Your password will expire in 3 weeks + 6 days  + 52 Minutes  
+
+amersp-sch01-3380973>show ip vrf
+  Name                             Default RD            Interfaces
+  INET                             1:666                 Gi0/2
+amersp-sch01-3380973>show conf | sec bfd
+ bfd interval 999 min_rx 999 multiplier 3
+ neighbor 68.136.33.113 fall-over bfd
+amersp-sch01-3380973>show bfd neighbor
+
+IPv4 Sessions
+NeighAddr                              LD/RD         RH/RS     State     Int
+68.136.33.113                           1/2148270090 Up        Up        Gi0/0
+amersp-sch01-3380973>exit
+
+========================================================================================================================
+
+***** No connection to 10.255.225.9 ***** 
+
+========================================================================================================================
+
+***** No connection to 10.255.225.13 ***** 
+
+========================================================================================================================
+
+***** No connection to 10.255.228.237 ***** 
+
+========================================================================================================================
+
+***** TELNET connection to 10.255.225.93 ***** 
+ 
+Authentication succeeded. Your password will expire in 3 weeks + 6 days  + 52 Minutes  
+
+amersp-irv01-3356835>show ip vrf
+  Name                             Default RD            Interfaces
+  GuestWLAN                        1:100                 Vl100
+amersp-irv01-3356835>show conf | sec bfd
+ bfd interval 999 min_rx 999 multiplier 3
+ neighbor 68.138.174.233 fall-over bfd
+amersp-irv01-3356835>show bfd neighbor
+
+IPv4 Sessions
+NeighAddr                              LD/RD         RH/RS     State     Int
+68.138.174.233                          1/222039     Up        Up        Gi0/0
+amersp-irv01-3356835>exit
+
+========================================================================================================================
+
+***** TELNET connection to 10.255.225.17 ***** 
+ 
+Authentication succeeded. Your password will expire in 3 weeks + 6 days  + 52 Minutes  
+
+amersp-lhr01-3203227>show ip vrf
+amersp-lhr01-3203227>show conf | sec bfd
+ bfd interval 999 min_rx 999 multiplier 3
+ neighbor 147.225.166.233 fall-over bfd
+amersp-lhr01-3203227>show bfd neighbor
+
+IPv4 Sessions
+NeighAddr                              LD/RD         RH/RS     State     Int
+147.225.166.233                         1/6483       Up        Up        Gi0/0
+amersp-lhr01-3203227>exit
+
+========================================================================================================================
+
+***** TELNET connection to 10.255.228.5 ***** 
+ 
+Authentication succeeded. Your password will expire in 3 weeks + 6 days  + 49 Minutes  
+
+amersp-sch01-3380973>show ip vrf
+  Name                             Default RD            Interfaces
+  INET                             1:666                 Gi0/2
+amersp-sch01-3380973>show conf | sec bfd
+ bfd interval 999 min_rx 999 multiplier 3
+ neighbor 68.136.33.113 fall-over bfd
+amersp-sch01-3380973>show bfd neighbor
+
+IPv4 Sessions
+NeighAddr                              LD/RD         RH/RS     State     Int
+68.136.33.113                           1/2148270090 Up        Up        Gi0/0
+amersp-sch01-3380973>exit
+
+========================================================================================================================
+
+***** No connection to 10.255.225.9 ***** 
+
+========================================================================================================================
+
+***** No connection to 10.255.225.13 ***** 
+
+========================================================================================================================
+
+***** No connection to 10.255.228.237 ***** 
+
+========================================================================================================================
+
+***** TELNET connection to 10.255.225.93 ***** 
+ 
+Authentication succeeded. Your password will expire in 3 weeks + 6 days  + 49 Minutes  
+
+amersp-irv01-3356835>show ip vrf
+  Name                             Default RD            Interfaces
+  GuestWLAN                        1:100                 Vl100
+amersp-irv01-3356835>show conf | sec bfd
+ bfd interval 999 min_rx 999 multiplier 3
+ neighbor 68.138.174.233 fall-over bfd
+amersp-irv01-3356835>show bfd neighbor
+
+IPv4 Sessions
+NeighAddr                              LD/RD         RH/RS     State     Int
+68.138.174.233                          1/222039     Up        Up        Gi0/0
+amersp-irv01-3356835>exit
+
+========================================================================================================================
+
+***** TELNET connection to 10.255.225.17 ***** 
+ 
+Authentication succeeded. Your password will expire in 3 weeks + 6 days  + 49 Minutes  
+
+amersp-lhr01-3203227>show ip vrf
+amersp-lhr01-3203227>show conf | sec bfd
+ bfd interval 999 min_rx 999 multiplier 3
+ neighbor 147.225.166.233 fall-over bfd
+amersp-lhr01-3203227>show bfd neighbor
+
+IPv4 Sessions
+NeighAddr                              LD/RD         RH/RS     State     Int
+147.225.166.233                         1/6483       Up        Up        Gi0/0
+amersp-lhr01-3203227>exit
+
+========================================================================================================================
+
+***** TELNET connection to 10.255.228.5 ***** 
+ 
+Authentication succeeded. Your password will expire in 3 weeks + 6 days  + 47 Minutes  
+
+amersp-sch01-3380973>show ip vrf
+  Name                             Default RD            Interfaces
+  INET                             1:666                 Gi0/2
+amersp-sch01-3380973>show conf | sec bfd
+ bfd interval 999 min_rx 999 multiplier 3
+ neighbor 68.136.33.113 fall-over bfd
+amersp-sch01-3380973>show bfd neighbor
+
+IPv4 Sessions
+NeighAddr                              LD/RD         RH/RS     State     Int
+68.136.33.113                           1/2148270090 Up        Up        Gi0/0
+amersp-sch01-3380973>exit
+
+========================================================================================================================
+
+***** No connection to 10.255.225.9 ***** 
+
+========================================================================================================================
+
+***** No connection to 10.255.225.13 ***** 
+
+========================================================================================================================
+
+***** No connection to 10.255.228.237 ***** 
+
+========================================================================================================================
+
+***** TELNET connection to 10.255.225.93 ***** 
+ 
+Authentication succeeded. Your password will expire in 3 weeks + 6 days  + 47 Minutes  
+
+amersp-irv01-3356835>show ip vrf
+  Name                             Default RD            Interfaces
+  GuestWLAN                        1:100                 Vl100
+amersp-irv01-3356835>show conf | sec bfd
+ bfd interval 999 min_rx 999 multiplier 3
+ neighbor 68.138.174.233 fall-over bfd
+amersp-irv01-3356835>show bfd neighbor
+
+IPv4 Sessions
+NeighAddr                              LD/RD         RH/RS     State     Int
+68.138.174.233                          1/222039     Up        Up        Gi0/0
+amersp-irv01-3356835>exit
+
+========================================================================================================================
+
+***** TELNET connection to 10.255.225.17 ***** 
+ 
+Authentication succeeded. Your password will expire in 3 weeks + 6 days  + 47 Minutes  
+
+amersp-lhr01-3203227>show ip vrf
+amersp-lhr01-3203227>show conf | sec bfd
+ bfd interval 999 min_rx 999 multiplier 3
+ neighbor 147.225.166.233 fall-over bfd
+amersp-lhr01-3203227>show bfd neighbor
+
+IPv4 Sessions
+NeighAddr                              LD/RD         RH/RS     State     Int
+147.225.166.233                         1/6483       Up        Up        Gi0/0
+amersp-lhr01-3203227>exit
+
+========================================================================================================================
+
+***** TELNET connection to 10.255.228.5 ***** 
+ 
+Authentication succeeded. Your password will expire in 3 weeks + 6 days  + 46 Minutes  
+
+amersp-sch01-3380973>show ip vrf
+  Name                             Default RD            Interfaces
+  INET                             1:666                 Gi0/2
+amersp-sch01-3380973>show conf | sec bfd
+ bfd interval 999 min_rx 999 multiplier 3
+ neighbor 68.136.33.113 fall-over bfd
+amersp-sch01-3380973>show bfd neighbor
+
+IPv4 Sessions
+NeighAddr                              LD/RD         RH/RS     State     Int
+68.136.33.113                           1/2148270090 Up        Up        Gi0/0
+amersp-sch01-3380973>exit
+
+========================================================================================================================
+
+***** TELNET connection to 10.255.228.5 ***** 
+ 
+Authentication succeeded. Your password will expire in 3 weeks + 6 days  + 46 Minutes  
+
+amersp-sch01-3380973>show ip vrf
+  Name                             Default RD            Interfaces
+  INET                             1:666                 Gi0/2
+amersp-sch01-3380973>show conf | sec bfd
+ bfd interval 999 min_rx 999 multiplier 3
+ neighbor 68.136.33.113 fall-over bfd
+amersp-sch01-3380973>show bfd neighbor
+
+IPv4 Sessions
+NeighAddr                              LD/RD         RH/RS     State     Int
+68.136.33.113                           1/2148270090 Up        Up        Gi0/0
+amersp-sch01-3380973>exit
+
+========================================================================================================================
+
+***** SSH connection to 10.255.225.9 ***** 
+
+amersp-ncy01-3221471>show ip vrf
+  Name                             Default RD            Interfaces
+  INET                             1:666                 Gi0/2
+amersp-ncy01-3221471>show conf | sec bfd
+ bfd interval 999 min_rx 999 multiplier 3
+ neighbor 152.183.150.65 fall-over bfd
+amersp-ncy01-3221471>show bfd neighbor
+
+IPv4 Sessions
+NeighAddr                              LD/RD         RH/RS     State     Int
+152.183.150.65                          1/882640     Up        Up        Gi0/0
+amersp-ncy01-3221471>exit
+
+========================================================================================================================
+
+***** SSH connection to 10.255.225.13 ***** 
+
+amersp-ncy02-3288665>show ip vrf
+  Name                             Default RD            Interfaces
+  INET                             1:666                 Gi0/2
+amersp-ncy02-3288665>show conf | sec bfd
+ bfd interval 999 min_rx 999 multiplier 3
+ neighbor 68.137.176.1 fall-over bfd
+amersp-ncy02-3288665>show bfd neighbor
+
+IPv4 Sessions
+NeighAddr                              LD/RD         RH/RS     State     Int
+68.137.176.1                            1/2147811434 Up        Up        Gi0/0
+amersp-ncy02-3288665>exit
+
+========================================================================================================================
+
+***** SSH connection to 10.255.228.237 ***** 
+
+amersp-chi02-19353801>show ip vrf
+  Name                             Default RD            Interfaces
+  INET                             1:666                 Gi0/2
+amersp-chi02-19353801>show conf | sec bfd
+ bfd interval 999 min_rx 999 multiplier 3
+ neighbor 147.225.69.237 fall-over bfd
+amersp-chi02-19353801>show bfd neighbor
+
+IPv4 Sessions
+NeighAddr                              LD/RD         RH/RS     State     Int
+147.225.69.237                          1/44576      Up        Up        Gi0/0
+amersp-chi02-19353801>exit
+
+========================================================================================================================
+
+***** TELNET connection to 10.255.225.93 ***** 
+ 
+Authentication succeeded. Your password will expire in 3 weeks + 6 days  + 46 Minutes  
+
+amersp-irv01-3356835>show ip vrf
+  Name                             Default RD            Interfaces
+  GuestWLAN                        1:100                 Vl100
+amersp-irv01-3356835>show conf | sec bfd
+ bfd interval 999 min_rx 999 multiplier 3
+ neighbor 68.138.174.233 fall-over bfd
+amersp-irv01-3356835>show bfd neighbor
+
+IPv4 Sessions
+NeighAddr                              LD/RD         RH/RS     State     Int
+68.138.174.233                          1/222039     Up        Up        Gi0/0
+amersp-irv01-3356835>exit
+
+========================================================================================================================
+
+***** TELNET connection to 10.255.225.17 ***** 
+ 
+Authentication succeeded. Your password will expire in 3 weeks + 6 days  + 46 Minutes  
+
+amersp-lhr01-3203227>show ip vrf
+amersp-lhr01-3203227>show conf | sec bfd
+ bfd interval 999 min_rx 999 multiplier 3
+ neighbor 147.225.166.233 fall-over bfd
+amersp-lhr01-3203227>show bfd neighbor
+
+IPv4 Sessions
+NeighAddr                              LD/RD         RH/RS     State     Int
+147.225.166.233                         1/6483       Up        Up        Gi0/0
+amersp-lhr01-3203227>exit
+
+========================================================================================================================
+
+***** TELNET connection to 10.255.228.5 ***** 
+ 
+Authentication succeeded. Your password will expire in 3 weeks + 6 days  + 44 Minutes  
+
+amersp-sch01-3380973>show ip vrf
+  Name                             Default RD            Interfaces
+  INET                             1:666                 Gi0/2
+amersp-sch01-3380973>show conf | sec bfd
+ bfd interval 999 min_rx 999 multiplier 3
+ neighbor 68.136.33.113 fall-over bfd
+amersp-sch01-3380973>show bfd neighbor
+
+IPv4 Sessions
+NeighAddr                              LD/RD         RH/RS     State     Int
+68.136.33.113                           1/2148270090 Up        Up        Gi0/0
+amersp-sch01-3380973>exit
+
+========================================================================================================================
+
+***** SSH connection to 10.255.225.9 ***** 
+
+amersp-ncy01-3221471>show ip vrf
+  Name                             Default RD            Interfaces
+  INET                             1:666                 Gi0/2
+amersp-ncy01-3221471>show conf | sec bfd
+ bfd interval 999 min_rx 999 multiplier 3
+ neighbor 152.183.150.65 fall-over bfd
+amersp-ncy01-3221471>show bfd neighbor
+
+IPv4 Sessions
+NeighAddr                              LD/RD         RH/RS     State     Int
+152.183.150.65                          1/882640     Up        Up        Gi0/0
+amersp-ncy01-3221471>exit
+
+========================================================================================================================
+
+***** SSH connection to 10.255.225.13 ***** 
+
+amersp-ncy02-3288665>show ip vrf
+  Name                             Default RD            Interfaces
+  INET                             1:666                 Gi0/2
+amersp-ncy02-3288665>show conf | sec bfd
+ bfd interval 999 min_rx 999 multiplier 3
+ neighbor 68.137.176.1 fall-over bfd
+amersp-ncy02-3288665>show bfd neighbor
+
+IPv4 Sessions
+NeighAddr                              LD/RD         RH/RS     State     Int
+68.137.176.1                            1/2147811434 Up        Up        Gi0/0
+amersp-ncy02-3288665>exit
+
+========================================================================================================================
+
+***** No connection to 10.255.228.237 ***** 
+
+========================================================================================================================
+
+***** TELNET connection to 10.255.225.93 ***** 
+ 
+Authentication succeeded. Your password will expire in 3 weeks + 6 days  + 44 Minutes  
+
+amersp-irv01-3356835>show ip vrf
+  Name                             Default RD            Interfaces
+  GuestWLAN                        1:100                 Vl100
+amersp-irv01-3356835>show conf | sec bfd
+ bfd interval 999 min_rx 999 multiplier 3
+ neighbor 68.138.174.233 fall-over bfd
+amersp-irv01-3356835>show bfd neighbor
+
+IPv4 Sessions
+NeighAddr                              LD/RD         RH/RS     State     Int
+68.138.174.233                          1/222039     Up        Up        Gi0/0
+amersp-irv01-3356835>exit
+
+========================================================================================================================
+
+***** TELNET connection to 10.255.225.17 ***** 
+ 
+Authentication succeeded. Your password will expire in 3 weeks + 6 days  + 44 Minutes  
+
+amersp-lhr01-3203227>show ip vrf
+amersp-lhr01-3203227>show conf | sec bfd
+ bfd interval 999 min_rx 999 multiplier 3
+ neighbor 147.225.166.233 fall-over bfd
+amersp-lhr01-3203227>show bfd neighbor
+
+IPv4 Sessions
+NeighAddr                              LD/RD         RH/RS     State     Int
+147.225.166.233                         1/6483       Up        Up        Gi0/0
+amersp-lhr01-3203227>exit
+
+========================================================================================================================
