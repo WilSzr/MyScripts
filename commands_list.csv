@@ -1,3 +1,1 @@
-show ip vrf
-show conf | sec bfd
-show bfd neighbor
+show ip interface brief | i up

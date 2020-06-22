@@ -21,7 +21,7 @@ with open('commands_list.csv','rb') as cm:
 
 cmd_list = list(itertools.chain(*cms))
 
-output_text = 'complete_vrf_bfd.txt'
+output_text = 'pre_check_file.txt'
 
 print flat_list 
 print '\n'
@@ -54,5 +54,3 @@ def main():
 
 if __name__ == '__main__':
 	main()
-
-
