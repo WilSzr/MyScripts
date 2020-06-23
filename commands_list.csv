@@ -1,1 +1,1 @@
-show ip interface brief | i up
+show ip interface brief

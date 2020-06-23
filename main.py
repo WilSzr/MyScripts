@@ -7,6 +7,7 @@ import os
 import time
 from telnet_func import telnet_vz
 from ssh_func import ssh_vz
+import getpass
 
 
 with open ('just_ip_cat2.csv','rb') as t:
@@ -28,11 +29,20 @@ print '\n'
 print cmd_list
 print '\n'
 
-user = 'amersp-wilszr'
-pw = 'AmerspJul2020.'
+#user = 'amersp-wilszr'
+#pw = 'AmerspJul2020.'
     
 
+def get_cred():     
+	user = getpass.getuser()     
+	password = getpass.getpass()     
+	return {'user' : user, 'password' : password} 
+
 def main():
+	
+	cred = get_cred() 	
+	user = cred["user"] 	
+	pw = cred["password"]
 
 	for ip in flat_list:
 	

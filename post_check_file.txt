@@ -1,0 +1,13 @@
+amersp-irv01-3356835>show ip interface brief
+Interface                  IP-Address      OK? Method Status                Protocol
+Embedded-Service-Engine0/0 unassigned      YES NVRAM  administratively down down    
+GigabitEthernet0/0         68.138.174.234  YES NVRAM  up                    up      
+GigabitEthernet0/1         81.128.165.50   YES manual up                    up      
+GigabitEthernet0/0/0       unassigned      YES unset  up                    up      
+GigabitEthernet0/0/1       unassigned      YES unset  administratively down down    
+GigabitEthernet0/0/2       unassigned      YES unset  administratively down down    
+GigabitEthernet0/0/3       unassigned      YES unset  administratively down down    
+Loopback0                  10.255.225.93   YES NVRAM  down                  down      
+NVI0                       68.138.174.234  YES unset  up                    up      
+Tunnel0                    10.255.239.30   YES NVRAM  up                    up      
+Tunnel1                    10.255.237.30   YES NVRAM  up                    up      
