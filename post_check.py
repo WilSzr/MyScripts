@@ -28,11 +28,16 @@ print '\n'
 print cmd_list
 print '\n'
 
-user = 'amersp-wilszr'
-pw = 'AmerspJul2020.'
-    
+def get_cred():     
+	user = str(raw_input("Username: "))     
+	pw = getpass.getpass()    
+	return {'user' : user, 'password' : pw} 
 
 def main():
+	
+	cred = get_cred() 	
+	user = cred["user"] 	
+	pw = cred["password"]
 
 	for ip in flat_list:
 	

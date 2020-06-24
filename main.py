@@ -28,15 +28,12 @@ print flat_list
 print '\n'
 print cmd_list
 print '\n'
-
-#user = 'amersp-wilszr'
-#pw = 'AmerspJul2020.'
     
 
 def get_cred():     
-	user = getpass.getuser()     
-	password = getpass.getpass()     
-	return {'user' : user, 'password' : password} 
+	user = str(raw_input("Username: "))     
+	pw = getpass.getpass()    
+	return {'user' : user, 'password' : pw} 
 
 def main():
 	
