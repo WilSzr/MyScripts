@@ -1,0 +1,1517 @@
+
+***** SSH connection to 10.43.15.242 ***** 
+
+
+amersp-alt02-15178585>ter len 0
+amersp-alt02-15178585>!
+amersp-alt02-15178585>sh conf
+Using 41335 out of 33554432 bytes
+!
+! Last configuration change at 20:17:23 GMT Thu Nov 19 2020 by sahakst
+!
+version 16.9
+no service pad
+service tcp-keepalives-in
+service tcp-keepalives-out
+service timestamps debug datetime msec localtime
+service timestamps log datetime localtime
+service password-encryption
+platform qfp utilization monitor load 80
+no platform punt-keepalive disable-kernel-core
+!
+hostname amersp-alt02-15178585
+!
+boot-start-marker
+boot system bootflash:isr4300-universalk9.16.09.06.SPA.bin
+boot system bootflash:isr4300-universalk9.03.16.07b.S.155-3.S7b-ext.SPA.bin
+boot-end-marker
+!
+!
+vrf definition Mgmt-intf
+ !
+ address-family ipv4
+ exit-address-family
+ !
+ address-family ipv6
+ exit-address-family
+!
+logging buffered 16384
+logging persistent url flash:/syslog size 8388608 filesize 1000000
+no logging console
+enable secret 5 $1$/GzO$3Q/w66c.PjcOr4as3t5o40
+!
+aaa new-model
+!
+!
+aaa authentication login default group tacacs+ local
+aaa authorization commands 15 default group tacacs+ if-authenticated 
+aaa accounting commands 15 default stop-only group tacacs+
+!
+!
+!
+!
+!
+!
+aaa session-id common
+clock timezone GMT 0 0
+no ip source-route
+!
+!
+!
+!
+!
+!
+!
+no ip bootp server
+no ip domain lookup
+!
+!
+!
+login on-success log
+!
+!
+!
+!
+!
+!
+!
+subscriber templating
+! 
+! 
+! 
+! 
+vtp mode transparent
+!
+multilink bundle-name authenticated
+!
+flow exporter VERIZON
+ description Flow sent to VERIZON
+ destination 205.223.97.4
+ source Loopback0
+ transport udp 9995
+!
+!
+flow exporter AMERSPORT
+ description Flow sent to Amersport internal server
+ destination 10.33.158.245
+ source Loopback0
+ transport udp 3000
+!
+!
+flow monitor VERIZON
+ description for customer
+ exporter VERIZON
+ cache timeout active 60
+ cache timeout update 300
+ statistics packet protocol
+ record netflow-original
+!
+!
+flow monitor AMERSPORT
+ exporter AMERSPORT
+ cache timeout active 60
+ cache timeout update 300
+ statistics packet protocol
+ record netflow-original
+!
+!
+!
+!
+!
+!
+!
+license udi pid ISR4331/K9 sn FDO204405MH
+no license smart enable
+file privilege 1
+diagnostic bootup level minimal
+!
+spanning-tree extend system-id
+no spanning-tree vlan 2,51-52
+spanning-tree vlan 1 priority 61440
+!
+!
+!
+username GNOuser password 7 0132035D5C380E1C75
+!
+redundancy
+ mode none
+!
+!
+!
+!
+!
+vlan internal allocation policy ascending
+!
+vlan 2,51-52 
+!
+track 1 interface GigabitEthernet0/0/0 line-protocol
+!
+track 2 ip route 206.112.194.64 255.255.255.192 reachability
+!
+track 3 ip route 206.112.202.64 255.255.255.192 reachability
+!
+track 4 ip sla 1 reachability
+!
+track 5 ip sla 2 reachability
+!
+no cdp run
+!
+!
+class-map match-any af43
+ match access-group name af43
+class-map match-any af42
+ match access-group name af42
+class-map match-any af41
+ match access-group name af41
+class-map match-any ef
+ match access-group name ef
+class-map match-any af21
+ match access-group name af21
+class-map match-any af12
+ match access-group name af12
+class-map match-any af31
+ match access-group name af31
+class-map match-any af13
+ match access-group name af13
+class-map match-any af32
+ match access-group name af32
+class-map match-any af23
+ match access-group name af23
+class-map match-any af11
+ match access-group name af11
+class-map match-any be
+ match access-group name be
+class-map match-any af33
+ match access-group name af33
+class-map match-any af22
+ match access-group name af22
+class-map match-any drop
+ match access-group name drop
+class-map match-any besteffort
+ match ip dscp default 
+class-map match-any realtime
+ match ip dscp cs5  ef 
+class-map match-any priority
+ match ip dscp cs4  af41  af42  af43 
+class-map match-any cs1
+ match access-group name cs1
+class-map match-any cs2
+ match access-group name cs2
+class-map match-any cs3
+ match access-group name cs3
+class-map match-any cs4
+ match access-group name cs4
+class-map match-any cs5
+ match access-group name cs5
+class-map match-any realtime-in
+ match ip dscp cs5 
+ match ip dscp ef 
+class-map match-any cs6
+ match access-group name cs6
+class-map match-any cs7
+ match access-group name cs7
+class-map match-any priority-in
+ match ip dscp cs4 
+ match ip dscp af41 
+ match ip dscp af42 
+ match ip dscp af43 
+class-map match-any transactional-in
+ match ip dscp cs2 
+ match ip dscp af21 
+ match ip dscp af22 
+ match ip dscp af23 
+class-map match-any missioncritical-in
+ match ip dscp cs3 
+ match ip dscp af31 
+ match ip dscp af32 
+ match ip dscp af33 
+ match ip dscp cs6 
+ match ip dscp cs7 
+class-map match-any general-in
+ match ip dscp cs1 
+ match ip dscp af11 
+ match ip dscp af12 
+ match ip dscp af13 
+class-map match-any missioncritical
+ match ip dscp cs3  af31  af32  af33  cs6  cs7 
+class-map match-any transactional
+ match ip dscp cs2  af21  af22  af23 
+class-map match-any general
+ match ip dscp cs1  af11  af12  af13 
+!
+policy-map etm-AmerSports
+ class realtime
+  priority 8
+ class priority
+  bandwidth remaining percent 40 
+  random-detect dscp-based
+ class missioncritical
+  bandwidth remaining percent 39 
+  random-detect dscp-based
+ class transactional
+  bandwidth remaining percent 16 
+  random-detect dscp-based
+ class general
+  bandwidth remaining percent 1 
+  random-detect dscp-based
+ class class-default
+  bandwidth remaining percent 4 
+  random-detect dscp-based
+policy-map shape-etm-AmerSports
+ class class-default
+  shape average 37600000 150400 0 
+   service-policy etm-AmerSports
+policy-map ingress-mark
+ class ef
+  set ip dscp ef
+ class cs5
+  set ip dscp cs5
+ class cs4
+  set ip dscp cs4
+ class af41
+  set ip dscp af41
+ class af42
+  set ip dscp af42
+ class af43
+  set ip dscp af43
+ class cs3
+  set ip dscp cs3
+ class af31
+  set ip dscp af31
+ class af32
+  set ip dscp af32
+ class af33
+  set ip dscp af33
+ class cs6
+  set ip dscp cs6
+ class cs7
+  set ip dscp cs7
+ class cs2
+  set ip dscp cs2
+ class af21
+  set ip dscp af21
+ class af22
+  set ip dscp af22
+ class af23
+  set ip dscp af23
+ class cs1
+  set ip dscp cs1
+ class af11
+  set ip dscp af11
+ class af12
+  set ip dscp af12
+ class af13
+  set ip dscp af13
+ class drop
+  set ip dscp default
+!
+! 
+!
+!
+!
+!
+crypto isakmp policy 3
+ encr aes 256
+ hash sha256
+ authentication pre-share
+ group 14
+ lifetime 28800
+crypto isakmp key erik65karlsson address 0.0.0.0         no-xauth
+crypto isakmp keepalive 90 periodic
+crypto isakmp nat keepalive 10
+!
+!
+crypto ipsec transform-set SPORTAMER2 esp-des 
+ mode tunnel
+crypto ipsec transform-set TSET-AES256-SHA256 esp-aes 256 esp-sha256-hmac 
+ mode transport
+!
+crypto ipsec profile DMVPNCLOUD2
+ set security-association lifetime seconds 7200
+ set transform-set TSET-AES256-SHA256 
+ set pfs group14
+!
+!
+!
+!
+!
+!
+! 
+! 
+!
+!
+interface Loopback0
+ description Verizon Management Interface
+ ip address 10.255.228.225 255.255.255.255
+!
+interface Tunnel0
+ description DMVPN Cloud 1 Spoke
+ bandwidth 1000
+ ip flow monitor AMERSPORT input
+ ip flow monitor VERIZON input
+ ip flow monitor AMERSPORT output
+ ip flow monitor VERIZON output
+ ip address 10.255.239.169 255.255.255.0
+ no ip redirects
+ ip mtu 1400
+ ip hold-time eigrp 220 45
+ ip nhrp authentication e65king
+ ip nhrp network-id 1199
+ ip nhrp holdtime 300
+ ip nhrp nhs 10.255.239.1 nbma 141.175.253.33 multicast
+ ip nhrp nhs 10.255.239.2 nbma 141.175.253.34 multicast
+ ip tcp adjust-mss 1360
+ load-interval 30
+ delay 10000
+ tunnel source Vlan2
+ tunnel mode gre multipoint
+ tunnel key 100
+ tunnel protection ipsec profile DMVPNCLOUD2 shared
+!
+interface Tunnel1
+ description DMVPN Cloud 2 Spoke
+ bandwidth 1000
+ ip flow monitor AMERSPORT input
+ ip flow monitor VERIZON input
+ ip flow monitor AMERSPORT output
+ ip flow monitor VERIZON output
+ ip address 10.255.237.169 255.255.255.0
+ no ip redirects
+ ip mtu 1400
+ ip hold-time eigrp 222 45
+ ip nhrp authentication c0nnekt
+ ip nhrp network-id 2299
+ ip nhrp holdtime 300
+ ip nhrp nhs 10.255.237.1 nbma 198.184.220.252 multicast
+ ip nhrp nhs 10.255.237.2 nbma 50.202.214.210 multicast
+ ip tcp adjust-mss 1360
+ load-interval 30
+ delay 12000
+ tunnel source Vlan2
+ tunnel mode gre multipoint
+ tunnel key 101
+ tunnel protection ipsec profile DMVPNCLOUD2 shared
+!
+interface GigabitEthernet0/0/0
+ description Verizon Business MPLS Circuit; VPN: AmerSports; SITE: altenmarkt-aut_w1c61576-5824090; Speed 40000 Kbps
+ bandwidth 40000
+ ip flow monitor VERIZON input
+ ip flow monitor AMERSPORT input
+ ip flow monitor VERIZON output
+ ip flow monitor AMERSPORT output
+ ip address 208.220.215.106 255.255.255.252
+ ip nbar protocol-discovery
+ load-interval 30
+ media-type rj45
+ speed 100
+ no negotiation auto
+ bfd interval 999 min_rx 999 multiplier 3
+ service-policy output shape-etm-AmerSports
+!
+interface GigabitEthernet0/0/1
+ no ip address
+ shutdown
+ negotiation auto
+!
+interface GigabitEthernet0/0/2
+ no ip address
+ shutdown
+ negotiation auto
+ no cdp enable
+!
+interface GigabitEthernet0/2/0
+ description AMERSPORTS INTERNET DMZ ; Speed 100/100 Mbps (up/down)
+ switchport access vlan 2
+ spanning-tree portfast
+!
+interface GigabitEthernet0/2/1
+ description UNUSED
+ shutdown
+!
+interface GigabitEthernet0/2/2
+ description AMERSPORTS LAN
+ switchport access vlan 52
+ switchport trunk native vlan 52
+ switchport trunk allowed vlan 51,52
+ switchport mode trunk
+ spanning-tree portfast
+!
+interface GigabitEthernet0/2/3
+ description UNUSED
+ shutdown
+!
+interface GigabitEthernet0
+ vrf forwarding Mgmt-intf
+ no ip address
+ negotiation auto
+!
+interface Vlan1
+ description UNUSED
+ no ip address
+ shutdown
+!
+interface Vlan2
+ description AMERSPORTS INTERNET DMZ ; Speed 100/100 Mbps (up/down) 
+ ip flow monitor AMERSPORT input
+ ip flow monitor AMERSPORT output
+ ip address 80.120.60.164 255.255.255.248
+ ip access-group INTERNET_IN_ACL in
+!
+interface Vlan51
+ description ALT2 TO ALT3 CROSS CONNECT VLAN
+ ip address 10.255.228.233 255.255.255.252
+ ip policy route-map OFFLOAD
+!
+interface Vlan52
+ description AMERSPORTS LAN
+ ip address 10.255.228.226 255.255.255.254 secondary
+ ip address 10.43.15.242 255.255.255.248
+ ip policy route-map OFFLOAD
+ service-policy input ingress-mark
+!
+!
+router eigrp 220
+ distribute-list route-map filter-tag-5757 in 
+ network 10.43.15.240 0.0.0.7
+ network 10.255.228.225 0.0.0.0
+ network 10.255.239.0 0.0.0.255
+ redistribute eigrp 230 route-map EIGRP_LAN-to-EIGRP_DMVPN
+ distance eigrp 15 10
+ passive-interface default
+ no passive-interface Tunnel0
+ eigrp stub connected static redistributed
+!
+!
+router eigrp 222
+ distribute-list route-map filter-tag-5757 in 
+ network 10.43.15.240 0.0.0.7
+ network 10.255.228.225 0.0.0.0
+ network 10.255.237.0 0.0.0.255
+ redistribute eigrp 230 route-map EIGRP_LAN-to-EIGRP_DMVPN
+ distance eigrp 15 10
+ passive-interface default
+ no passive-interface Tunnel1
+ eigrp stub connected static redistributed
+!
+!
+router eigrp 230
+ network 10.43.15.240 0.0.0.7
+ network 10.255.228.225 0.0.0.0
+ redistribute eigrp 220 metric 10000 1000 255 1 1500 route-map EIGRP_DMVPN-to-EIGRP_LAN
+ redistribute eigrp 222 metric 10000 1000 255 1 1500 route-map EIGRP_DMVPN-to-EIGRP_LAN
+ redistribute eigrp 500 metric 10000 1000 255 1 1500 route-map EIGRP_DMVPN-to-EIGRP_LAN
+ redistribute bgp 65052 metric 10000 1000 255 1 1500 route-map BGP-to-EIGRP
+ distance eigrp 16 17
+ passive-interface default
+ no passive-interface Vlan52
+!
+!
+router eigrp 500
+ network 10.255.228.232 0.0.0.3
+ redistribute eigrp 220 metric 10000 1000 255 1 1500
+ redistribute eigrp 222 metric 10000 1000 255 1 1500
+ distance eigrp 18 19
+ passive-interface default
+ no passive-interface Vlan51
+!
+router bgp 65052
+ bgp log-neighbor-changes
+ network 10.255.228.225 mask 255.255.255.255
+ network 208.220.215.104 mask 255.255.255.252
+ timers bgp 30 90
+ redistribute connected route-map connect-bgp
+ redistribute static route-map static-bgp
+ redistribute eigrp 230 route-map EIGRP-to-BGP
+ neighbor 208.220.215.105 remote-as 65000
+ neighbor 208.220.215.105 fall-over bfd
+ neighbor 208.220.215.105 route-map ce-in in
+!
+ip forward-protocol nd
+no ip http server
+no ip http secure-server
+ip tftp source-interface Loopback0
+ip route 0.0.0.0 0.0.0.0 Vlan2 80.120.60.161 tag 999
+ip route 141.175.253.33 255.255.255.255 Vlan2 80.120.60.161 tag 999 name DMVPN_hub_ncy01
+ip route 141.175.253.34 255.255.255.255 Vlan2 80.120.60.161 tag 999 name DMVPN_hub_ncy02
+ip tacacs source-interface Loopback0 
+!
+ip as-path access-list 1 permit _65533_
+ip as-path access-list 1 permit _65535_
+ip as-path access-list 1 permit _65004_
+ip ssh time-out 60
+ip ssh source-interface Loopback0
+ip ssh version 2
+!
+!
+ip prefix-list default-route seq 10 permit 0.0.0.0/0
+!
+ip prefix-list dmvpn-1 seq 10 permit 10.255.239.0/24 le 32
+!
+ip prefix-list dmvpn-2 seq 10 permit 10.255.237.0/24 le 32
+!
+ip access-list standard LOCAL_INTERNET
+ permit 212.183.8.168 0.0.0.7
+ permit 80.120.60.160 0.0.0.7
+!
+ip access-list extended CAP
+ permit tcp any any eq telnet
+ permit tcp any eq telnet any
+ip access-list extended INTERNET_IN_ACL
+ permit udp any any eq bootpc
+ permit udp any any eq bootps
+ remark ipsec encapsulation
+ permit esp any any
+ permit udp any eq non500-isakmp any
+ permit udp any eq isakmp any
+ remark management traffic from customer
+ permit ip host 141.175.254.1 any
+ permit ip 195.190.2.0 0.0.0.255 any
+ permit ip host 198.184.220.2 any
+ permit ip host 50.202.14.198 any
+ permit icmp any any ttl-exceeded
+ip access-list extended OFFLOAD-MATCH
+ permit ip any any dscp af43
+ permit ip any any dscp af33
+ permit ip any any dscp af23
+ permit ip any any dscp af13
+ permit ip any any dscp default
+ip access-list extended af11
+ remark Microsoft Lync  Video  Clients & Servers
+ permit udp any 10.0.0.0 0.255.255.255 range 61000 61999
+ permit udp 10.0.0.0 0.255.255.255 range 61000 61999 any
+ permit udp any 141.175.0.0 0.0.127.255 range 61000 61999
+ permit udp 141.175.0.0 0.0.127.255 range 61000 61999 any
+ permit udp any 172.16.0.0 0.15.255.255 range 61000 61999
+ permit udp 172.16.0.0 0.15.255.255 range 61000 61999 any
+ remark AF-11 RESERVED
+ permit tcp any 10.0.0.0 0.255.255.255 range 9170 9179
+ permit tcp 10.0.0.0 0.255.255.255 range 9170 9179 any
+ip access-list extended af12
+ remark WSUS Traffic
+ deny   tcp any 10.0.0.0 0.255.255.255 eq 8530
+ deny   tcp 10.0.0.0 0.255.255.255 eq 8530 any
+ deny   tcp any 141.175.0.0 0.0.127.255 eq 8530
+ deny   tcp 141.175.0.0 0.0.127.255 eq 8530 any
+ deny   tcp any 172.16.0.0 0.15.255.255 eq 8530
+ deny   tcp 172.16.0.0 0.15.255.255 eq 8530 any
+ remark SCCM Server Traffic : Offload ALL TCP UDP ICMP Protocol From/To the Master Server in EIP
+ deny   ip any host 10.49.1.108
+ deny   ip host 10.49.1.108 any
+ remark SCCM 2007/2013Traffic
+ deny   tcp any 10.0.0.0 0.255.255.255 eq 8532
+ deny   tcp 10.0.0.0 0.255.255.255 eq 8532 any
+ deny   tcp any 141.175.0.0 0.0.127.255 eq 8532
+ deny   tcp 141.175.0.0 0.0.127.255 eq 8532 any
+ deny   tcp any 172.16.0.0 0.15.255.255 eq 8532
+ deny   tcp 172.16.0.0 0.15.255.255 eq 8532 any
+ remark Microsoft Lync File Transfer Server & Clients
+ deny   tcp any 10.0.0.0 0.255.255.255 range 59000 59999
+ deny   tcp 10.0.0.0 0.255.255.255 range 59000 59999 any
+ deny   tcp any 141.175.0.0 0.0.127.255 range 59000 59999
+ deny   tcp 141.175.0.0 0.0.127.255 range 59000 59999 any
+ deny   tcp any 172.16.0.0 0.15.255.255 range 59000 59999
+ deny   tcp 172.16.0.0 0.15.255.255 range 59000 59999 any
+ remark Microsoft Lync  Application Sharing Server & Clients
+ deny   tcp any 10.0.0.0 0.255.255.255 range 49000 49999
+ deny   tcp 10.0.0.0 0.255.255.255 range 49000 49999 any
+ deny   tcp any 141.175.0.0 0.0.127.255 range 49000 49999
+ deny   tcp 141.175.0.0 0.0.127.255 range 49000 49999 any
+ deny   tcp any 172.16.0.0 0.15.255.255 range 49000 49999
+ deny   tcp 172.16.0.0 0.15.255.255 range 49000 49999 any
+ remark SMTP
+ deny   tcp any 10.0.0.0 0.255.255.255 eq smtp
+ deny   tcp 10.0.0.0 0.255.255.255 eq smtp any
+ deny   tcp any 141.175.0.0 0.0.127.255 eq smtp
+ deny   tcp 141.175.0.0 0.0.127.255 eq smtp any
+ deny   tcp any 172.16.0.0 0.15.255.255 eq smtp
+ deny   tcp 172.16.0.0 0.15.255.255 eq smtp any
+ remark POP3
+ deny   tcp any 10.0.0.0 0.255.255.255 eq pop3
+ deny   tcp 10.0.0.0 0.255.255.255 eq pop3 any
+ deny   tcp any 141.175.0.0 0.0.127.255 eq pop3
+ deny   tcp 141.175.0.0 0.0.127.255 eq pop3 any
+ deny   tcp any 172.16.0.0 0.15.255.255 eq pop3
+ deny   tcp 172.16.0.0 0.15.255.255 eq pop3 any
+ remark IMAP
+ deny   tcp any 10.0.0.0 0.255.255.255 eq 143
+ deny   tcp 10.0.0.0 0.255.255.255 eq 143 any
+ deny   tcp any 141.175.0.0 0.0.127.255 eq 143
+ deny   tcp 141.175.0.0 0.0.127.255 eq 143 any
+ deny   tcp any 172.16.0.0 0.15.255.255 eq 143
+ deny   tcp 172.16.0.0 0.15.255.255 eq 143 any
+ remark Exchange 2007
+ deny   tcp any 10.0.0.0 0.255.255.255 range 5000 5001
+ deny   tcp 10.0.0.0 0.255.255.255 range 5000 5001 any
+ deny   tcp any 141.175.0.0 0.0.127.255 range 5000 5001
+ deny   tcp 141.175.0.0 0.0.127.255 range 5000 5001 any
+ deny   tcp any 172.16.0.0 0.15.255.255 range 5000 5001
+ deny   tcp 172.16.0.0 0.15.255.255 range 5000 5001 any
+ remark Exchange 2013
+ deny   tcp any 10.33.158.68 0.0.0.3 eq 443
+ deny   tcp 10.33.158.68 0.0.0.3 eq 443 any
+ deny   tcp any 10.30.40.4 0.0.0.3 eq 443
+ deny   tcp 10.30.40.4 0.0.0.3 eq 443 any
+ remark AF-13 RESERVED
+ deny   tcp any 10.0.0.0 0.255.255.255 range 9210 9219
+ deny   tcp 10.0.0.0 0.255.255.255 range 9210 9219 any
+ remark Vshpere ESX library replication
+ deny   tcp any 10.0.0.0 0.255.255.255 eq 902
+ deny   tcp 10.0.0.0 0.255.255.255 eq 902 any
+ remark SCCM Server Traffic : Offload ALL TCP UDP ICMP Protocol From/To the distribution point in ALT
+ deny   ip any host 10.43.0.243
+ deny   ip host 10.43.0.243 any
+ remark ANY
+ permit ip 10.0.0.0 0.255.255.255 10.0.0.0 0.255.255.255
+ permit ip 10.0.0.0 0.255.255.255 141.175.0.0 0.0.255.255
+ permit ip 10.0.0.0 0.255.255.255 172.16.0.0 0.15.255.255
+ permit ip 141.175.0.0 0.0.255.255 10.0.0.0 0.255.255.255
+ permit ip 141.175.0.0 0.0.255.255 141.175.0.0 0.0.255.255
+ permit ip 141.175.0.0 0.0.255.255 172.16.0.0 0.15.255.255
+ permit ip 172.16.0.0 0.15.255.255 10.0.0.0 0.255.255.255
+ permit ip 172.16.0.0 0.15.255.255 141.175.0.0 0.0.255.255
+ permit ip 172.16.0.0 0.15.255.255 172.16.0.0 0.15.255.255
+ip access-list extended af13
+ remark WSUS Traffic
+ permit tcp any 10.0.0.0 0.255.255.255 eq 8530
+ permit tcp 10.0.0.0 0.255.255.255 eq 8530 any
+ permit tcp any 141.175.0.0 0.0.127.255 eq 8530
+ permit tcp 141.175.0.0 0.0.127.255 eq 8530 any
+ permit tcp any 172.16.0.0 0.15.255.255 eq 8530
+ permit tcp 172.16.0.0 0.15.255.255 eq 8530 any
+ remark SCCM Server Traffic : Offload ALL TCP UDP ICMP Protocol From/To the Master Server in EIP
+ permit ip any host 10.49.1.108
+ permit ip host 10.49.1.108 any
+ remark SCCM 2007/2013Traffic
+ permit tcp any 10.0.0.0 0.255.255.255 eq 8532
+ permit tcp 10.0.0.0 0.255.255.255 eq 8532 any
+ permit tcp any 141.175.0.0 0.0.127.255 eq 8532
+ permit tcp 141.175.0.0 0.0.127.255 eq 8532 any
+ permit tcp any 172.16.0.0 0.15.255.255 eq 8532
+ permit tcp 172.16.0.0 0.15.255.255 eq 8532 any
+ remark Microsoft Lync File Transfer Server & Clients
+ permit tcp any 10.0.0.0 0.255.255.255 range 59000 59999
+ permit tcp 10.0.0.0 0.255.255.255 range 59000 59999 any
+ permit tcp any 141.175.0.0 0.0.127.255 range 59000 59999
+ permit tcp 141.175.0.0 0.0.127.255 range 59000 59999 any
+ permit tcp any 172.16.0.0 0.15.255.255 range 59000 59999
+ permit tcp 172.16.0.0 0.15.255.255 range 59000 59999 any
+ remark Microsoft Lync  Application Sharing Server & Clients
+ permit tcp any 10.0.0.0 0.255.255.255 range 49000 49999
+ permit tcp 10.0.0.0 0.255.255.255 range 49000 49999 any
+ permit tcp any 141.175.0.0 0.0.127.255 range 49000 49999
+ permit tcp 141.175.0.0 0.0.127.255 range 49000 49999 any
+ permit tcp any 172.16.0.0 0.15.255.255 range 49000 49999
+ permit tcp 172.16.0.0 0.15.255.255 range 49000 49999 any
+ remark SMTP
+ permit tcp any 10.0.0.0 0.255.255.255 eq smtp
+ permit tcp 10.0.0.0 0.255.255.255 eq smtp any
+ permit tcp any 141.175.0.0 0.0.127.255 eq smtp
+ permit tcp 141.175.0.0 0.0.127.255 eq smtp any
+ permit tcp any 172.16.0.0 0.15.255.255 eq smtp
+ permit tcp 172.16.0.0 0.15.255.255 eq smtp any
+ remark POP3
+ permit tcp any 10.0.0.0 0.255.255.255 eq pop3
+ permit tcp 10.0.0.0 0.255.255.255 eq pop3 any
+ permit tcp any 141.175.0.0 0.0.127.255 eq pop3
+ permit tcp 141.175.0.0 0.0.127.255 eq pop3 any
+ permit tcp any 172.16.0.0 0.15.255.255 eq pop3
+ permit tcp 172.16.0.0 0.15.255.255 eq pop3 any
+ remark IMAP
+ permit tcp any 10.0.0.0 0.255.255.255 eq 143
+ permit tcp 10.0.0.0 0.255.255.255 eq 143 any
+ permit tcp any 141.175.0.0 0.0.127.255 eq 143
+ permit tcp 141.175.0.0 0.0.127.255 eq 143 any
+ permit tcp any 172.16.0.0 0.15.255.255 eq 143
+ permit tcp 172.16.0.0 0.15.255.255 eq 143 any
+ remark Exchange 2007
+ permit tcp any 10.0.0.0 0.255.255.255 range 5000 5001
+ permit tcp 10.0.0.0 0.255.255.255 range 5000 5001 any
+ permit tcp any 141.175.0.0 0.0.127.255 range 5000 5001
+ permit tcp 141.175.0.0 0.0.127.255 range 5000 5001 any
+ permit tcp any 172.16.0.0 0.15.255.255 range 5000 5001
+ permit tcp 172.16.0.0 0.15.255.255 range 5000 5001 any
+ remark Exchange 2013
+ permit tcp any 10.33.158.68 0.0.0.3 eq 443
+ permit tcp 10.33.158.68 0.0.0.3 eq 443 any
+ permit tcp any 10.30.40.4 0.0.0.3 eq 443
+ permit tcp 10.30.40.4 0.0.0.3 eq 443 any
+ remark AF-13 RESERVED
+ permit tcp any 10.0.0.0 0.255.255.255 range 9210 9219
+ permit tcp 10.0.0.0 0.255.255.255 range 9210 9219 any
+ remark Vshpere ESX library replication
+ permit tcp any 10.0.0.0 0.255.255.255 eq 902
+ permit tcp 10.0.0.0 0.255.255.255 eq 902 any
+ remark SCCM Server Traffic : Offload ALL TCP UDP ICMP Protocol From/To the distribution point in ALT
+ permit ip any host 10.43.0.243
+ permit ip host 10.43.0.243 any
+ip access-list extended af21
+ remark Mitel VoIP - Phone + UCA : Boot  Sequence TFTP
+ permit udp any 10.0.0.0 0.255.255.255 eq tftp
+ permit udp 10.0.0.0 0.255.255.255 eq tftp any
+ permit udp any 172.16.0.0 0.15.255.255 eq tftp
+ permit udp 172.16.0.0 0.15.255.255 eq tftp any
+ permit udp any 10.0.0.0 0.255.255.255 eq 20001
+ permit udp 10.0.0.0 0.255.255.255 eq 20001 any
+ permit udp any 172.16.0.0 0.15.255.255 eq 20001
+ permit udp 172.16.0.0 0.15.255.255 eq 20001 any
+ remark Citrix
+ permit tcp any 10.0.0.0 0.255.255.255 eq 1494
+ permit tcp 10.0.0.0 0.255.255.255 eq 1494 any
+ permit udp any 10.0.0.0 0.255.255.255 eq 1604
+ permit udp 10.0.0.0 0.255.255.255 eq 1604 any
+ remark Retail/Ecom & Database WebService
+ permit tcp any 10.33.0.0 0.0.255.255 eq 9100
+ permit tcp 10.33.0.0 0.0.255.255 eq 9100 any
+ remark AF-21 RESERVED
+ permit tcp any 10.0.0.0 0.255.255.255 range 9150 9159
+ permit tcp 10.0.0.0 0.255.255.255 range 9150 9159 any
+ip access-list extended af22
+ remark AF-22 RESERVED
+ permit tcp any 10.0.0.0 0.255.255.255 range 9160 9169
+ permit tcp 10.0.0.0 0.255.255.255 range 9160 9169 any
+ip access-list extended af23
+ remark SAP Demand+ HIP Planning solution
+ permit tcp any 10.49.56.0 0.0.1.255 eq 8401
+ permit tcp 10.49.56.0 0.0.1.255 eq 8401 any
+ remark Devin GED
+ permit tcp any host 10.33.128.8 eq 8083
+ permit tcp host 10.33.128.8 eq 8083 any
+ remark PLASMA GED
+ permit tcp any host 10.33.128.8 eq 8098
+ permit tcp host 10.33.128.8 eq 8098 any
+ remark FTP
+ permit tcp any 10.0.0.0 0.255.255.255 range ftp-data ftp
+ permit tcp 10.0.0.0 0.255.255.255 range ftp-data ftp any
+ permit tcp any 141.175.0.0 0.0.127.255 range ftp-data ftp
+ permit tcp 141.175.0.0 0.0.127.255 range ftp-data ftp any
+ permit tcp any 172.16.0.0 0.15.255.255 range ftp-data ftp
+ permit tcp 172.16.0.0 0.15.255.255 range ftp-data ftp any
+ remark Web Proxy
+ permit tcp any 10.0.0.0 0.255.255.255 eq 3128
+ permit tcp 10.0.0.0 0.255.255.255 eq 3128 any
+ permit tcp any 141.175.0.0 0.0.127.255 eq 3128
+ permit tcp 141.175.0.0 0.0.127.255 eq 3128 any
+ permit tcp any 10.0.0.0 0.255.255.255 eq 8080
+ permit tcp 10.0.0.0 0.255.255.255 eq 8080 any
+ permit tcp any 141.175.0.0 0.0.127.255 eq 8080
+ permit tcp 141.175.0.0 0.0.127.255 eq 8080 any
+ remark Netflow
+ permit udp any 10.0.0.0 0.255.255.255 eq 3000
+ permit udp 10.0.0.0 0.255.255.255 eq 3000 any
+ permit udp any 141.175.0.0 0.0.127.255 eq 3000
+ permit udp 141.175.0.0 0.0.127.255 eq 3000 any
+ remark AF-23 RESERVED
+ permit tcp any 10.0.0.0 0.255.255.255 range 9200 9209
+ permit tcp 10.0.0.0 0.255.255.255 range 9200 9209 any
+ip access-list extended af31
+ remark Alcatel VoIP FR . All TCP and UDP protocol CallCenter IPs
+ permit tcp host 10.33.146.6 any
+ permit tcp any host 10.33.146.6
+ permit udp host 10.33.146.6 any
+ permit udp any host 10.33.146.6
+ permit tcp host 10.33.68.6 any
+ permit tcp any host 10.33.68.6
+ permit udp host 10.33.68.6 any
+ permit udp any host 10.33.68.6
+ remark Alcatel VoIP FR . All ICMP,  TCP and UDP protocol for Gateway/Hive
+ permit tcp host 10.33.68.7 any
+ permit tcp any host 10.33.68.7
+ permit udp host 10.33.68.7 any
+ permit udp any host 10.33.68.7
+ permit tcp host 10.33.20.7 any
+ permit tcp any host 10.33.20.7
+ permit udp host 10.33.20.7 any
+ permit udp any host 10.33.20.7
+ permit tcp host 10.33.12.7 any
+ permit tcp any host 10.33.12.7
+ permit udp host 10.33.12.7 any
+ permit udp any host 10.33.12.7
+ remark Generic Phone/VoIP SIG  . H323: TCP 1720
+ permit tcp any 10.0.0.0 0.255.255.255 eq 1720
+ permit tcp 10.0.0.0 0.255.255.255 eq 1720 any
+ permit tcp any 172.16.0.0 0.15.255.255 eq 1720
+ permit tcp 172.16.0.0 0.15.255.255 eq 1720 any
+ remark Generic Phone/VoIP SIG  . H323: TCP 1719
+ permit tcp any 10.0.0.0 0.255.255.255 eq 1719
+ permit tcp 10.0.0.0 0.255.255.255 eq 1719 any
+ permit tcp any 172.16.0.0 0.15.255.255 eq 1719
+ permit tcp 172.16.0.0 0.15.255.255 eq 1719 any
+ remark Polycom Video conference
+ permit udp any 10.0.0.0 0.255.255.255 range 20000 21000
+ permit udp 10.0.0.0 0.255.255.255 range 20000 21000 any
+ permit udp any 172.16.0.0 0.15.255.255 range 20000 21000
+ permit udp 172.16.0.0 0.15.255.255 range 20000 21000 any
+ remark Generic SIP Sig . (Lync & Phone 3CX)
+ permit tcp any 10.0.0.0 0.255.255.255 range 5060 5062
+ permit tcp 10.0.0.0 0.255.255.255 range 5060 5062 any
+ permit tcp any 141.175.0.0 0.0.127.255 range 5060 5062
+ permit tcp 141.175.0.0 0.0.127.255 range 5060 5062 any
+ permit tcp any 172.16.0.0 0.15.255.255 range 5060 5062
+ permit tcp 172.16.0.0 0.15.255.255 range 5060 5062 any
+ remark Phone 3CX . VoIP
+ permit tcp any 10.0.0.0 0.255.255.255 range 5080 5090
+ permit tcp 10.0.0.0 0.255.255.255 range 5080 5090 any
+ permit tcp any 172.16.0.0 0.15.255.255 range 5080 5090
+ permit tcp 172.16.0.0 0.15.255.255 range 5080 5090 any
+ remark Phone 3CX VoIP . Audio: UDP 5060 . 5062
+ permit udp any 10.0.0.0 0.255.255.255 range 5060 5062
+ permit udp 10.0.0.0 0.255.255.255 range 5060 5062 any
+ permit udp any 172.16.0.0 0.15.255.255 range 5060 5062
+ permit udp 172.16.0.0 0.15.255.255 range 5060 5062 any
+ remark Phone 3CX VoIP . Audio: UDP 5080 . 5090
+ permit udp any 10.0.0.0 0.255.255.255 range 5080 5090
+ permit udp 10.0.0.0 0.255.255.255 range 5080 5090 any
+ permit udp any 172.16.0.0 0.15.255.255 range 5080 5090
+ permit udp 172.16.0.0 0.15.255.255 range 5080 5090 any
+ remark Microsoft Lync  Audio Clients & Servers
+ permit udp any 10.0.0.0 0.255.255.255 range 60000 60999
+ permit udp 10.0.0.0 0.255.255.255 range 60000 60999 any
+ permit udp any 141.175.0.0 0.0.127.255 range 60000 60999
+ permit udp 141.175.0.0 0.0.127.255 range 60000 60999 any
+ permit udp any 172.16.0.0 0.15.255.255 range 60000 60999
+ permit udp 172.16.0.0 0.15.255.255 range 60000 60999 any
+ remark Shoretel VoIP (USA only) . Sig/NCC  Protocols
+ permit udp any 10.0.0.0 0.255.255.255 range 5440 5446
+ permit udp 10.0.0.0 0.255.255.255 range 5440 5446 any
+ remark Mitel VoIP  . Phone + UCA : Call/SiG
+ permit tcp any 10.0.0.0 0.255.255.255 eq 6800
+ permit tcp 10.0.0.0 0.255.255.255 eq 6800 any
+ permit tcp any 172.16.0.0 0.15.255.255 eq 6800
+ permit tcp 172.16.0.0 0.15.255.255 eq 6800 any
+ permit tcp any 10.0.0.0 0.255.255.255 range 6900 6999
+ permit tcp 10.0.0.0 0.255.255.255 range 6900 6999 any
+ permit tcp any 172.16.0.0 0.15.255.255 range 6900 6999
+ permit tcp 172.16.0.0 0.15.255.255 range 6900 6999 any
+ remark Mitel VoIP  . Phone + UCA : Audio Call
+ permit udp any 10.0.0.0 0.255.255.255 range 50000 50511
+ permit udp 10.0.0.0 0.255.255.255 range 50000 50511 any
+ permit udp any 172.16.0.0 0.15.255.255 range 50000 50511
+ permit udp 172.16.0.0 0.15.255.255 range 50000 50511 any
+ remark VoIP RTP Communications : Mitel UDP 9000-9002 + 3CX UDP 9000-9199
+ permit udp any 10.0.0.0 0.255.255.255 range 9000 9199
+ permit udp 10.0.0.0 0.255.255.255 range 9000 9199 any
+ permit udp any 172.16.0.0 0.15.255.255 range 9000 9199
+ permit udp 172.16.0.0 0.15.255.255 range 9000 9199 any
+ remark Avaya VoIP  . Phone MEX : Audio Call : UDP 2048-3028
+ permit udp any 10.0.0.0 0.255.255.255 range 2048 3028
+ permit udp 10.0.0.0 0.255.255.255 range 2048 3028 any
+ permit udp any 172.16.0.0 0.15.255.255 range 2048 3028
+ permit udp 172.16.0.0 0.15.255.255 range 2048 3028 any
+ remark AF-31 RESERVED
+ permit tcp any 10.0.0.0 0.255.255.255 range 9130 9139
+ permit tcp 10.0.0.0 0.255.255.255 range 9130 9139 any
+ip access-list extended af32
+ remark CENTREON
+ permit tcp any host 141.175.1.112 eq www
+ permit tcp any host 141.175.1.112 eq 443
+ permit tcp host 141.175.1.112 eq www any
+ permit tcp host 141.175.1.112 eq 443 any
+ remark NETSTAT
+ permit tcp any host 141.175.1.243 eq www
+ permit tcp any host 141.175.1.243 eq 443
+ permit tcp host 141.175.1.243 eq www any
+ permit tcp host 141.175.1.243 eq 443 any
+ remark SPLUNK
+ permit tcp any host 10.33.128.19 eq www
+ permit tcp any host 10.33.128.19 eq 443
+ permit tcp host 10.33.128.19 eq www any
+ permit tcp host 10.33.128.19 eq 443 any
+ remark AIRWAVE
+ permit tcp any host 10.33.128.133 eq www
+ permit tcp any host 10.33.128.133 eq 443
+ permit tcp host 10.33.128.133 eq www any
+ permit tcp host 10.33.128.133 eq 443 any
+ remark IPM
+ permit tcp any host 10.33.33.77 eq www
+ permit tcp any host 10.33.33.77 eq 443
+ permit tcp host 10.33.33.77 eq www any
+ permit tcp host 10.33.33.77 eq 443 any
+ remark MNGT
+ permit tcp any host 10.33.158.240 eq www
+ permit tcp any host 10.33.158.240 eq 443
+ permit udp any host 10.33.158.240 eq snmp
+ permit udp any host 10.33.158.240 eq snmptrap
+ permit tcp host 10.33.158.240 eq www any
+ permit tcp host 10.33.158.240 eq 443 any
+ permit udp host 10.33.158.240 eq snmp any
+ permit udp host 10.33.158.240 eq snmptrap any
+ remark AF-32 RESERVED
+ permit tcp any 10.0.0.0 0.255.255.255 range 9140 9149
+ permit tcp 10.0.0.0 0.255.255.255 range 9140 9149 any
+ip access-list extended af33
+ remark INTRANET CMS
+ permit tcp any host 10.33.2.64 eq www
+ permit tcp any host 10.33.2.64 eq 443
+ permit tcp host 10.33.2.64 eq www any
+ permit tcp host 10.33.2.64 eq 443 any
+ permit tcp any host 141.175.1.64 eq www
+ permit tcp any host 141.175.1.64 eq 443
+ permit tcp host 141.175.1.64 eq www any
+ permit tcp host 141.175.1.64 eq 443 any
+ remark INTRANET Liferay
+ permit tcp any host 10.33.128.59 eq www
+ permit tcp any host 10.33.128.59 eq 443
+ permit tcp host 10.33.128.59 eq www any
+ permit tcp host 10.33.128.59 eq 443 any
+ remark B2X
+ permit tcp any 10.0.0.0 0.255.255.255 range 8000 8005
+ permit tcp 10.0.0.0 0.255.255.255 range 8000 8005 any
+ permit tcp any 141.175.0.0 0.0.127.255 range 8000 8005
+ permit tcp 141.175.0.0 0.0.127.255 range 8000 8005 any
+ remark Exchange 2013 Server Replication
+ permit tcp any 10.0.0.0 0.255.255.255 eq 64327
+ permit tcp 10.0.0.0 0.255.255.255 eq 64327 any
+ remark AF-33 RESERVED
+ permit tcp any 10.0.0.0 0.255.255.255 range 9190 9199
+ permit tcp 10.0.0.0 0.255.255.255 range 9190 9199 any
+ip access-list extended af41
+ remark SAP
+ permit tcp any 10.49.0.0 0.0.255.255 range 3200 3399
+ permit tcp any 10.49.0.0 0.0.255.255 range 3600 3699
+ remark COMFIL + SAP TELNET
+ permit tcp any 10.49.0.0 0.0.255.255 eq telnet
+ permit tcp 10.49.0.0 0.0.255.255 eq telnet any
+ permit tcp any 141.175.0.0 0.0.127.255 eq telnet
+ permit tcp 141.175.0.0 0.0.127.255 eq telnet any
+ remark DNS
+ permit tcp any 10.0.0.0 0.255.255.255 eq domain
+ permit tcp 10.0.0.0 0.255.255.255 eq domain any
+ permit udp any 10.0.0.0 0.255.255.255 eq domain
+ permit udp 10.0.0.0 0.255.255.255 eq domain any
+ permit tcp any 141.175.0.0 0.0.127.255 eq domain
+ permit tcp 141.175.0.0 0.0.127.255 eq domain any
+ permit udp any 141.175.0.0 0.0.127.255 eq domain
+ permit udp 141.175.0.0 0.0.127.255 eq domain any
+ permit tcp any 172.16.0.0 0.15.255.255 eq domain
+ permit tcp 172.16.0.0 0.15.255.255 eq domain any
+ permit udp any 172.16.0.0 0.15.255.255 eq domain
+ permit udp 172.16.0.0 0.15.255.255 eq domain any
+ remark AF-41 RESERVED
+ permit tcp any 10.0.0.0 0.255.255.255 range 9110 9119
+ permit tcp 10.0.0.0 0.255.255.255 range 9110 9119 any
+ip access-list extended af42
+ remark PLASMA
+ permit tcp any host 10.33.128.8 eq 8097
+ permit tcp host 10.33.128.8 eq 8097 any
+ remark DEVIN
+ permit tcp any host 10.33.128.8 eq 8090
+ permit tcp host 10.33.128.8 eq 8090 any
+ remark AF-42 RESERVED
+ permit tcp any 10.0.0.0 0.255.255.255 range 9120 9129
+ permit tcp 10.0.0.0 0.255.255.255 range 9120 9129 any
+ip access-list extended af43
+ remark AF-43 RESERVED
+ permit tcp any 10.0.0.0 0.255.255.255 range 9180 9189
+ permit tcp 10.0.0.0 0.255.255.255 range 9180 9189 any
+ remark Cisco Wireless LWAPP Control
+ permit udp any 10.0.0.0 0.255.255.255 range 12222 12223
+ permit udp 10.0.0.0 0.255.255.255 range 12222 12223 any
+ permit udp any 141.175.0.0 0.0.127.255 range 12222 12223
+ permit udp 141.175.0.0 0.0.127.255 range 12222 12223 any
+ remark Cisco Wireless  CAPWAP Control
+ permit udp any 10.0.0.0 0.255.255.255 range 5246 5247
+ permit udp 10.0.0.0 0.255.255.255 range 5246 5247 any
+ permit udp any 141.175.0.0 0.0.127.255 range 5246 5247
+ permit udp 141.175.0.0 0.0.127.255 range 5246 5247 any
+ip access-list extended be
+ permit ip any any
+ip access-list extended cs1
+ip access-list extended cs2
+ip access-list extended cs3
+ip access-list extended cs4
+ip access-list extended cs5
+ip access-list extended cs6
+ip access-list extended cs7
+ip access-list extended drop
+ip access-list extended ef
+ip sla 1
+ icmp-echo 208.220.215.105 source-ip 208.220.215.106
+ frequency 10
+ip sla schedule 1 life forever start-time now
+ip sla 2
+ icmp-echo 10.255.228.234 source-ip 10.255.228.233
+ frequency 10
+ip sla schedule 2 life forever start-time now
+ip sla 100
+ icmp-echo 147.225.5.34 source-ip 208.220.215.106
+ frequency 300
+ip sla schedule 100 life forever start-time now
+ip sla 200
+ icmp-echo 10.255.224.14 source-ip 208.220.215.106
+ frequency 300
+ip sla schedule 200 life forever start-time now
+ip sla 300
+ icmp-echo 68.139.227.66 source-ip 208.220.215.106
+ frequency 300
+ip sla schedule 300 life forever start-time now
+ip sla 400
+ icmp-echo 68.138.233.210 source-ip 208.220.215.106
+ frequency 300
+ip sla schedule 400 life forever start-time now
+ip sla 500
+ icmp-echo 152.183.150.66 source-ip 208.220.215.106
+ frequency 300
+ip sla schedule 500 life forever start-time now
+ip sla 600
+ icmp-echo 147.225.69.238 source-ip 208.220.215.106
+ frequency 300
+ip sla schedule 600 life forever start-time now
+ip sla responder
+logging source-interface Loopback0
+logging host 195.129.111.26
+logging host 206.112.194.76
+logging host 206.112.202.76
+access-list 51 remark Verizon Business SNMP
+access-list 51 permit 146.170.56.128 0.0.0.127
+access-list 51 permit 146.170.57.0 0.0.0.255
+access-list 51 permit 146.170.64.0 0.0.7.255
+access-list 51 permit 146.170.96.128 0.0.0.63
+access-list 51 permit 146.170.97.0 0.0.0.255
+access-list 51 permit 146.170.100.0 0.0.3.255
+access-list 51 permit 146.170.124.0 0.0.3.255
+access-list 51 permit 159.24.0.0 0.0.255.255
+access-list 51 permit 170.127.71.128 0.0.0.127
+access-list 51 permit 205.223.96.0 0.0.15.255
+access-list 51 permit 206.112.192.64 0.0.0.63
+access-list 51 permit 206.112.193.64 0.0.0.63
+access-list 51 permit 206.112.194.64 0.0.0.63
+access-list 51 permit 206.112.196.0 0.0.0.255
+access-list 51 permit 206.112.200.64 0.0.0.63
+access-list 51 permit 206.112.201.64 0.0.0.63
+access-list 51 permit 206.112.202.64 0.0.0.63
+access-list 51 permit 206.112.204.0 0.0.0.255
+access-list 52 permit 172.30.124.132
+access-list 52 remark Amersports SNMP
+access-list 52 permit 141.175.0.0 0.0.7.255
+access-list 52 permit 10.33.128.0 0.0.1.255
+access-list 52 permit 10.33.158.240 0.0.0.15
+access-list 52 permit 10.33.128.0 0.0.63.255
+access-list 53 remark Amersports SNMP
+access-list 53 permit 10.0.0.0 0.255.255.255
+access-list 55 permit 206.113.119.128 0.0.0.63
+access-list 55 remark Verizon Business WAN Analysis Reporting
+access-list 66 remark ILMI, cable-docsis SNMP bug fixes
+access-list 66 deny   any
+!
+!
+route-map BGP-to-EIGRP deny 10 
+ match as-path 1
+!
+route-map BGP-to-EIGRP permit 100 
+ set tag 105
+!
+route-map EIGRP-to-BGP deny 10 
+ match tag 100 105 106
+!
+route-map EIGRP-to-BGP permit 100 
+!
+route-map EIGRP_LAN-to-EIGRP_DMVPN deny 10 
+ match tag 100 105 106
+!
+route-map EIGRP_LAN-to-EIGRP_DMVPN permit 100 
+ set tag 5757
+!
+route-map EIGRP_DMVPN-to-EIGRP_LAN deny 10 
+ match tag 100 105 106 5757
+!
+route-map EIGRP_DMVPN-to-EIGRP_LAN permit 100 
+ set tag 105
+!
+route-map connect-bgp deny 5 
+ match ip address LOCAL_INTERNET
+!
+route-map connect-bgp permit 10 
+!
+route-map ce-in deny 10 
+ match ip address prefix-list default-route
+!
+route-map ce-in deny 20 
+ match ip address prefix-list dmvpn-1
+!
+route-map ce-in deny 30 
+ match ip address prefix-list dmvpn-2
+!
+route-map ce-in permit 100 
+!
+route-map static-bgp deny 10 
+ match tag 999
+!
+route-map static-bgp permit 100 
+ match tag 998
+ set metric 0
+!
+route-map OFFLOAD deny 10 
+ match ip address OFFLOAD-MATCH
+!
+route-map OFFLOAD permit 20 
+ set ip next-hop verify-availability 208.220.215.105 1 track 4
+ set ip next-hop verify-availability 10.255.228.234 2 track 5
+!
+route-map filter-tag-5757 deny 10 
+ match tag 5757
+!
+route-map filter-tag-5757 permit 20 
+!
+snmp-server view BLOCK iso included
+snmp-server view BLOCK ipAddrEntry.*.*.*.*.* excluded
+snmp-server view BLOCK ipAddrEntry.*.10.255.*.* included
+snmp-server view BLOCK ipAddrEntry.*.68.*.*.* included
+snmp-server view BLOCK ipAddrEntry.*.147.*.*.* included
+snmp-server view BLOCK ipAddrEntry.*.152.*.*.* included
+snmp-server view BLOCK ipAddrEntry.*.199.*.*.* included
+snmp-server view BLOCK ipAddrEntry.*.206.*.*.* included
+snmp-server view BLOCK ipAddrEntry.*.208.*.*.* included
+snmp-server view BLOCK ipNetToMediaEntry.*.*.*.*.*.* excluded
+snmp-server view BLOCK ipNetToMediaEntry.*.*.10.255.*.* included
+snmp-server view BLOCK ipNetToMediaEntry.*.*.68.*.*.* included
+snmp-server view BLOCK ipNetToMediaEntry.*.*.147.*.*.* included
+snmp-server view BLOCK ipNetToMediaEntry.*.*.152.*.*.* included
+snmp-server view BLOCK ipNetToMediaEntry.*.*.199.*.*.* included
+snmp-server view BLOCK ipNetToMediaEntry.*.*.206.*.*.* included
+snmp-server view BLOCK ipNetToMediaEntry.*.*.208.*.*.* included
+snmp-server view BLOCK atEntry.*.*.*.*.*.*.* excluded
+snmp-server view BLOCK atEntry.*.*.*.10.255.*.* included
+snmp-server view BLOCK atEntry.*.*.*.68.*.*.* included
+snmp-server view BLOCK atEntry.*.*.*.147.*.*.* included
+snmp-server view BLOCK atEntry.*.*.*.152.*.*.* included
+snmp-server view BLOCK atEntry.*.*.*.199.*.*.* included
+snmp-server view BLOCK atEntry.*.*.*.206.*.*.* included
+snmp-server view BLOCK atEntry.*.*.*.208.*.*.* included
+snmp-server view BLOCK ipAddressEntry.*.*.*.*.*.*.* excluded
+snmp-server view BLOCK ipAddressEntry.*.*.*.10.255.*.* included
+snmp-server view BLOCK ipAddressEntry.*.*.*.68.*.*.* included
+snmp-server view BLOCK ipAddressEntry.*.*.*.147.*.*.* included
+snmp-server view BLOCK ipAddressEntry.*.*.*.152.*.*.* included
+snmp-server view BLOCK ipAddressEntry.*.*.*.199.*.*.* included
+snmp-server view BLOCK ipAddressEntry.*.*.*.206.*.*.* included
+snmp-server view BLOCK ipAddressEntry.*.*.*.208.*.*.* included
+snmp-server view rtt-view sysUpTime included
+snmp-server view rtt-view ciscoPingMIB included
+snmp-server view rtt-view ciscoRttMonMIB included
+snmp-server community readData RO 55
+snmp-server community cable-docsis RO 66
+snmp-server community 4mer$p-I!0nlY RO 52
+snmp-server community v3r!z0n! RO 53
+snmp-server community d9JFG4QW view BLOCK RW 51
+snmp-server trap-source Loopback0
+snmp-server enable traps snmp authentication linkdown linkup coldstart warmstart
+snmp-server enable traps config
+snmp-server enable traps frame-relay multilink bundle-mismatch
+snmp-server enable traps frame-relay
+snmp-server enable traps frame-relay subif
+snmp-server host 206.112.194.73 7y9A5hWJ  config snmp
+snmp-server host 206.112.202.73 7y9A5hWJ  config snmp
+snmp ifmib ifindex persist
+tacacs-server host 206.112.194.70
+tacacs-server host 206.112.202.70
+tacacs-server timeout 20
+tacacs-server directed-request
+tacacs-server key 7 05285F3E1B65681938
+!
+!
+!
+!
+control-plane
+!
+privilege exec level 0 traceroute
+privilege exec level 0 ping
+privilege exec all level 1 show
+banner login ^CCCC
+
+------------- Verizon Business Managed Services -------------
+
+This system is to be used by authorized Engineering personnel
+only.  Individuals using this computer system without authority,
+or in excess of their authority, are subject to having all activities
+monitored and recorded by system personnel.
+
+Anyone using this system expressly consents to such monitoring and is
+advised that if such monitoring reveals possible evidence of criminal
+activity, system personnel may provide the evidence of such monitoring
+to law enforcement officials.
+
+^C
+alias exec top show flow monitor VERIZON cache sort highest counter bytes top 20 format table
+!
+line con 0
+ location 10.16.14.98 ; Domain 43
+ exec-timeout 5 0
+ password 7 02530F74382238396A
+ logging synchronous
+ transport input none
+ stopbits 1
+line aux 0
+ exec-timeout 5 0
+ password 7 144219243F201D3302
+ stopbits 1
+line vty 0 4
+ exec-timeout 30 0
+ password 7 091945262A21200A2D
+ logging synchronous
+ transport input ssh
+!
+ntp server 206.112.194.76 prefer
+ntp server 206.112.202.76
+!
+!
+!
+!
+!
+end
+
+amersp-alt02-15178585>!
+amersp-alt02-15178585>show ip interface brief
+Interface              IP-Address      OK? Method Status                Protocol
+GigabitEthernet0/0/0   208.220.215.106 YES NVRAM  up                    up      
+GigabitEthernet0/0/1   unassigned      YES NVRAM  administratively down down    
+GigabitEthernet0/0/2   unassigned      YES NVRAM  administratively down down    
+GigabitEthernet0/2/0   unassigned      YES unset  up                    up      
+GigabitEthernet0/2/1   unassigned      YES unset  administratively down down    
+GigabitEthernet0/2/2   unassigned      YES unset  up                    up      
+GigabitEthernet0/2/3   unassigned      YES unset  administratively down down    
+GigabitEthernet0       unassigned      YES NVRAM  down                  down    
+Loopback0              10.255.228.225  YES NVRAM  up                    up      
+Tunnel0                10.255.239.169  YES NVRAM  up                    up      
+Tunnel1                10.255.237.169  YES NVRAM  up                    up      
+Vlan1                  unassigned      YES unset  administratively down down    
+Vlan2                  80.120.60.164   YES NVRAM  up                    up      
+Vlan51                 10.255.228.233  YES NVRAM  up                    up      
+Vlan52                 10.43.15.242    YES NVRAM  up                    up      
+amersp-alt02-15178585>!
+amersp-alt02-15178585>show inter des
+Interface                      Status         Protocol Description
+Gi0/0/0                        up             up       Verizon Business MPLS Circuit; VPN: AmerSports; SITE: altenmarkt-aut_w1c61576-5824090; Speed 40000 Kbps
+Gi0/0/1                        admin down     down     
+Gi0/0/2                        admin down     down     
+Gi0/2/0                        up             up       AMERSPORTS INTERNET DMZ ; Speed 100/100 Mbps (up/down)
+Gi0/2/1                        admin down     down     UNUSED
+Gi0/2/2                        up             up       AMERSPORTS LAN
+Gi0/2/3                        admin down     down     UNUSED
+Gi0                            down           down     
+Lo0                            up             up       Verizon Management Interface
+Tu0                            up             up       DMVPN Cloud 1 Spoke
+Tu1                            up             up       DMVPN Cloud 2 Spoke
+Vl1                            admin down     down     UNUSED
+Vl2                            up             up       AMERSPORTS INTERNET DMZ ; Speed 100/100 Mbps (up/down) 
+Vl51                           up             up       ALT2 TO ALT3 CROSS CONNECT VLAN
+Vl52                           up             up       AMERSPORTS LAN
+amersp-alt02-15178585>!
+amersp-alt02-15178585>show dmvpn
+Legend: Attrb --> S - Static, D - Dynamic, I - Incomplete
+	N - NATed, L - Local, X - No Socket
+	T1 - Route Installed, T2 - Nexthop-override
+	C - CTS Capable, I2 - Temporary
+	# Ent --> Number of NHRP entries with same NBMA peer
+	NHS Status: E --> Expecting Replies, R --> Responding, W --> Waiting
+	UpDn Time --> Up or Down Time for a Tunnel
+==========================================================================
+
+Interface: Tunnel0, IPv4 NHRP Details 
+Type:Spoke, NHRP Peers:8, 
+
+ # Ent  Peer NBMA Addr Peer Tunnel Add State  UpDn Tm Attrb
+ ----- --------------- --------------- ----- -------- -----
+    16 194.197.8.247     10.255.239.24    UP 00:02:25   DT2
+                         10.255.239.24    UP 00:02:25   DT2
+                         10.255.239.24    UP 00:02:25   DT2
+                         10.255.239.24    UP 00:02:25   DT2
+     0 UNKNOWN           10.43.150.193  NHRP    never    IX
+     0 UNKNOWN             10.44.14.14  NHRP    never    IX
+     0 UNKNOWN             10.44.14.18  NHRP    never    IX
+     0 UNKNOWN             10.44.14.78  NHRP    never    IX
+     0 UNKNOWN            10.44.14.225  NHRP    never    IX
+     0 UNKNOWN            10.44.14.227  NHRP    never    IX
+     0 UNKNOWN            10.44.14.240  NHRP    never    IX
+     0 UNKNOWN              10.47.3.14  NHRP    never    IX
+     0 UNKNOWN             10.49.10.18  NHRP    never    IX
+     0 UNKNOWN             10.49.12.61  NHRP    never    IX
+     0 UNKNOWN              10.97.4.62  NHRP    never    IX
+     0 194.197.8.247     10.255.239.24    UP 00:02:25   DT1
+     2 81.144.181.210    10.255.239.12    UP 00:02:01   DT2
+                         10.255.239.12    UP 00:02:01   DT1
+     2 157.25.114.146   10.255.239.164    UP 00:02:11   DT2
+                        10.255.239.164    UP 00:02:11   DT1
+     3 195.190.2.151      10.255.239.3    UP 00:02:28   DT2
+                          10.255.239.3    UP 00:02:28   DT1
+                          10.255.239.3    UP 00:02:28   DT2
+     4 77.85.195.136     10.255.239.69    UP 00:02:28   DT2
+                         10.255.239.69    UP 00:02:28   DT2
+                         10.255.239.69    UP 00:02:28   DT2
+                         10.255.239.69    UP 00:02:28   DT1
+     3 148.59.130.10    10.255.239.126    UP 00:00:17   DT2
+                        10.255.239.126    UP 00:00:17   DT1
+                        10.255.239.126    UP 00:00:17   DT2
+     1 141.175.253.33     10.255.239.1    UP 00:02:30     S
+     1 141.175.253.34     10.255.239.2    UP 00:02:30     S
+
+Interface: Tunnel1, IPv4 NHRP Details 
+Type:Spoke, NHRP Peers:2, 
+
+ # Ent  Peer NBMA Addr Peer Tunnel Add State  UpDn Tm Attrb
+ ----- --------------- --------------- ----- -------- -----
+     1 198.184.220.252    10.255.237.1    UP 00:02:30     S
+     1 50.202.214.210     10.255.237.2    UP 00:02:29     S
+
+amersp-alt02-15178585>!
+amersp-alt02-15178585>show ip eigrp topology su
+EIGRP-IPv4 Topology Table Summary for AS(220)/ID(10.255.228.225)
+  Head serial 1, next serial 831
+  547 routes, 0 pending replies, 0 dummies
+  Enabled on 1 interfaces, 2 neighbors present on 1 interfaces
+  Quiescent interfaces: 
+    Tu0
+EIGRP-IPv4 Topology Table Summary for AS(222)/ID(10.255.228.225)
+  Head serial 1, next serial 93
+  78 routes, 0 pending replies, 0 dummies
+  Enabled on 1 interfaces, 2 neighbors present on 1 interfaces
+  Quiescent interfaces: 
+    Tu1
+EIGRP-IPv4 Topology Table Summary for AS(230)/ID(10.255.228.225)
+  Head serial 1, next serial 2162
+  832 routes, 0 pending replies, 0 dummies
+  Enabled on 1 interfaces, 2 neighbors present on 1 interfaces
+  Quiescent interfaces: 
+    Vl52
+EIGRP-IPv4 Topology Table Summary for AS(500)/ID(10.255.228.225)
+  Head serial 1, next serial 829
+  563 routes, 0 pending replies, 0 dummies
+  Enabled on 1 interfaces, 1 neighbors present on 1 interfaces
+  Quiescent interfaces: 
+    Vl51
+amersp-alt02-15178585>!
+amersp-alt02-15178585>show ip eigrp neighbors
+EIGRP-IPv4 Neighbors for AS(220)
+H   Address                 Interface              Hold Uptime   SRTT   RTO  Q  Seq
+                                                   (sec)         (ms)       Cnt Num
+1   10.255.239.1            Tu0                      42 00:02:34   42   252  0  19401
+0   10.255.239.2            Tu0                      40 00:02:34   41   246  0  17574
+EIGRP-IPv4 Neighbors for AS(222)
+H   Address                 Interface              Hold Uptime   SRTT   RTO  Q  Seq
+                                                   (sec)         (ms)       Cnt Num
+1   10.255.237.2            Tu1                      40 00:02:33  128   768  0  60177
+0   10.255.237.1            Tu1                      41 00:02:33  128   768  0  60473
+EIGRP-IPv4 Neighbors for AS(230)
+H   Address                 Interface              Hold Uptime   SRTT   RTO  Q  Seq
+                                                   (sec)         (ms)       Cnt Num
+1   10.43.15.244            Vl52                     12 00:02:37    1   100  0  272775
+0   10.43.15.243            Vl52                     10 00:02:37    1   100  0  304
+EIGRP-IPv4 Neighbors for AS(500)
+H   Address                 Interface              Hold Uptime   SRTT   RTO  Q  Seq
+                                                   (sec)         (ms)       Cnt Num
+0   10.255.228.234          Vl51                     12 00:02:34    1   100  0  123
+amersp-alt02-15178585>!
+amersp-alt02-15178585>show conf | i ip route
+track 2 ip route 206.112.194.64 255.255.255.192 reachability
+track 3 ip route 206.112.202.64 255.255.255.192 reachability
+ip route 0.0.0.0 0.0.0.0 Vlan2 80.120.60.161 tag 999
+ip route 141.175.253.33 255.255.255.255 Vlan2 80.120.60.161 tag 999 name DMVPN_hub_ncy01
+ip route 141.175.253.34 255.255.255.255 Vlan2 80.120.60.161 tag 999 name DMVPN_hub_ncy02
+amersp-alt02-15178585>!
+amersp-alt02-15178585>show version
+Cisco IOS XE Software, Version 16.09.06
+Cisco IOS Software [Fuji], ISR Software (X86_64_LINUX_IOSD-UNIVERSALK9-M), Version 16.9.6, RELEASE SOFTWARE (fc2)
+Technical Support: http://www.cisco.com/techsupport
+Copyright (c) 1986-2020 by Cisco Systems, Inc.
+Compiled Thu 27-Aug-20 02:41 by mcpre
+
+
+Cisco IOS-XE software, Copyright (c) 2005-2020 by cisco Systems, Inc.
+All rights reserved.  Certain components of Cisco IOS-XE software are
+licensed under the GNU General Public License ("GPL") Version 2.0.  The
+software code licensed under GPL Version 2.0 is free software that comes
+with ABSOLUTELY NO WARRANTY.  You can redistribute and/or modify such
+GPL code under the terms of GPL Version 2.0.  For more details, see the
+documentation or "License Notice" file accompanying the IOS-XE software,
+or the applicable URL provided on the flyer accompanying the IOS-XE
+software.
+
+
+ROM: IOS-XE ROMMON
+
+amersp-alt02-15178585 uptime is 4 minutes
+Uptime for this control processor is 6 minutes
+System returned to ROM by Reload Command at 20:09:06 GMT Thu Nov 19 2020
+System image file is "bootflash:isr4300-universalk9.16.09.06.SPA.bin"
+Last reload reason: Reload Command
+
+
+
+This product contains cryptographic features and is subject to United
+States and local country laws governing import, export, transfer and
+use. Delivery of Cisco cryptographic products does not imply
+third-party authority to import, export, distribute or use encryption.
+Importers, exporters, distributors and users are responsible for
+compliance with U.S. and local country laws. By using this product you
+agree to comply with applicable laws and regulations. If you are unable
+to comply with U.S. and local laws, return this product immediately.
+
+A summary of U.S. laws governing Cisco cryptographic products may be found at:
+http://www.cisco.com/wwl/export/crypto/tool/stqrg.html
+
+If you require further assistance please contact us by sending email to
+export@cisco.com.
+
+
+
+Suite License Information for Module:'esg' 
+
+--------------------------------------------------------------------------------
+Suite                 Suite Current         Type           Suite Next reboot     
+--------------------------------------------------------------------------------
+FoundationSuiteK9     None                  None           None                  
+securityk9
+appxk9
+
+AdvUCSuiteK9          None                  None           None                  
+uck9
+cme-srst
+cube
+
+
+Technology Package License Information: 
+
+-----------------------------------------------------------------
+Technology    Technology-package           Technology-package
+              Current       Type           Next reboot  
+------------------------------------------------------------------
+appxk9           appxk9           Permanent        appxk9
+uck9             None             None             None
+securityk9       securityk9       Permanent        securityk9
+ipbase           ipbasek9         Permanent        ipbasek9
+
+The current throughput level is 100000 kbps 
+
+
+Smart Licensing Status: Smart Licensing is DISABLED
+
+cisco ISR4331/K9 (1RU) processor with 1784189K/6147K bytes of memory.
+Processor board ID FDO2043A1RX
+4 Virtual Ethernet interfaces
+7 Gigabit Ethernet interfaces
+32768K bytes of non-volatile configuration memory.
+4194304K bytes of physical memory.
+3207167K bytes of flash memory at bootflash:.
+0K bytes of WebUI ODM Files at webui:.
+
+Configuration register is 0x2102
+
+amersp-alt02-15178585>!
+amersp-alt02-15178585>show ip route summary
+IP routing table name is default (0x0)
+IP routing table maximum-paths is 32
+Route Source    Networks    Subnets     Replicates  Overhead    Memory (bytes)
+connected       0           15          0           1440        4560
+static          1           2           0           288         912
+application     0           0           0           0           0
+nhrp            0           7           0           672         2128
+eigrp 220       3           513         0           132032      156864
+eigrp 222       0           42          0           10112       12768
+eigrp 230       1           266         0           34176       81168
+bgp 65052       0           19          0           1824        5776
+  External: 19 Internal: 0 Local: 0
+eigrp 500       0           0           0           0           0
+internal        54                                              87736
+Total           59          864         0           180544      351912
+amersp-alt02-15178585>exit
+
+========================================================================================================================

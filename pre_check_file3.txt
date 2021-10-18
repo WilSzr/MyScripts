@@ -1,0 +1,151 @@
+
+***** SSH connection to 10.255.226.201 ***** 
+
+amersp-mjt01-24554703>show ip interface brief
+Interface                  IP-Address      OK? Method Status                Protocol
+Embedded-Service-Engine0/0 unassigned      YES NVRAM  administratively down down    
+GigabitEthernet0/0         10.255.226.202  YES NVRAM  up                    up      
+GigabitEthernet0/0.200     192.168.1.1     YES NVRAM  up                    up      
+GigabitEthernet0/0.201     192.168.0.1     YES NVRAM  up                    up      
+GigabitEthernet0/1         50.234.60.106   YES NVRAM  up                    up      
+Serial0/0/0                unassigned      YES NVRAM  administratively down down    
+FastEthernet0/1/0          unassigned      YES unset  up                    up      
+FastEthernet0/1/1          unassigned      YES unset  administratively down down    
+FastEthernet0/1/2          unassigned      YES unset  administratively down down    
+FastEthernet0/1/3          unassigned      YES unset  administratively down down    
+Dialer0                    unassigned      YES unset  administratively down down    
+ --More--         
+amersp-mjt01-24554703>
+amersp-mjt01-24554703>show inter des
+Interface                      Status         Protocol Description
+Em0/0                          admin down     down     
+Gi0/0                          up             up       AMERSPORTS LAN
+Gi0/0.200                      up             up       back-to-back connection
+Gi0/0.201                      up             up       AMERSPORTS LAN
+Gi0/1                          up             up       AMERSPORTS INTERNET [0]:W1A97506 ; Speed 30000/30000 Kbps (up/down)
+Se0/0/0                        admin down     down     UNUSED
+Fa0/1/0                        up             up       Verizon Business MPLS Circuit; VPN: AmerSports; SITE: mount-juliet-tn_c0156031-287149997-6017430; Speed 4000 kb/s
+Fa0/1/1                        admin down     down     UNUSED
+Fa0/1/2                        admin down     down     UNUSED
+Fa0/1/3                        admin down     down     UNUSED
+Di0                            admin down     down     UNUSED
+Lo0                            up             up       Verizon Management Interface
+MF1                            down           down     UNUSED
+MF1.100                        admin down     down     UNUSED
+NV0                            up             up       
+Tu0                            up             up       DMVPN Cloud 1 Spoke
+Tu1                            up             up       DMVPN Cloud 2 Spoke
+Vl1                            up             up       UNUSED
+ --More--         
+amersp-mjt01-24554703>
+amersp-mjt01-24554703>show dmvpn
+Legend: Attrb --> S - Static, D - Dynamic, I - Incomplete
+	N - NATed, L - Local, X - No Socket
+	# Ent --> Number of NHRP entries with same NBMA peer
+	NHS Status: E --> Expecting Replies, R --> Responding, W --> Waiting
+	UpDn Time --> Up or Down Time for a Tunnel
+==========================================================================
+
+Interface: Tunnel0, IPv4 NHRP Details 
+Type:Spoke, NHRP Peers:23, 
+
+ # Ent  Peer NBMA Addr Peer Tunnel Add State  UpDn Tm Attrb
+ ----- --------------- --------------- ----- -------- -----
+     1 141.175.253.33     10.255.239.1    UP    1d02h     S
+     1 141.175.253.34     10.255.239.2    UP 20:18:57     S
+     1 195.190.2.151      10.255.239.3    UP 02:04:37     D
+     1 195.190.2.152      10.255.239.4    UP 00:40:19     D
+     1 81.144.181.210    10.255.239.12    UP     2w0d    DX
+     1 218.255.85.226    10.255.239.15    UP 00:00:01    DX
+     1 81.218.184.211    10.255.239.25    UP     2w0d    DX
+     1 81.128.165.50     10.255.239.30    UP     1w4d    DX
+     1 193.85.227.204    10.255.239.32    UP     1w4d    DX
+     1 82.208.53.37      10.255.239.37    UP     1w0d   DNX
+     1 211.24.100.224    10.255.239.39    UP 06:48:47   DNX
+     1 80.14.130.1       10.255.239.43    UP     1w4d   DNX
+     1 194.158.243.38    10.255.239.47    UP 02:37:17    DX
+     1 2.109.133.138     10.255.239.65    UP     1w1d    DX
+     1 77.85.195.136     10.255.239.69    UP 05:11:29    DX
+     1 5.45.3.29         10.255.239.73    UP     1w5d    DX
+     1 80.14.188.141     10.255.239.80    UP     1w4d   DNX
+ --More--         
+amersp-mjt01-24554703>
+amersp-mjt01-24554703>show ip eigrp topology su
+EIGRP-IPv4 Topology Table Summary for AS(220)/ID(10.255.226.201)
+  Head serial 2, next serial 4345
+  128 routes, 0 pending replies, 0 dummies
+  Enabled on 1 interfaces, 2 neighbors present on 1 interfaces
+  Quiescent interfaces: 
+    Tu0
+EIGRP-IPv4 Topology Table Summary for AS(222)/ID(10.255.226.201)
+  Head serial 2, next serial 2777
+  493 routes, 0 pending replies, 0 dummies
+  Enabled on 1 interfaces, 2 neighbors present on 1 interfaces
+  Quiescent interfaces: 
+    Tu1
+EIGRP-IPv4 Topology Table Summary for AS(500)/ID(10.255.226.201)
+  Head serial 1, next serial 13188
+  587 routes, 0 pending replies, 0 dummies
+  Enabled on 1 interfaces, 1 neighbors present on 1 interfaces
+  Quiescent interfaces: 
+    Gi0/0.200
+amersp-mjt01-24554703>!
+amersp-mjt01-24554703>show ip eigrp neighbors
+EIGRP-IPv4 Neighbors for AS(220)
+H   Address                 Interface              Hold Uptime   SRTT   RTO  Q  Seq
+                                                   (sec)         (ms)       Cnt Num
+0   10.255.239.2            Tu0                      44 20:19:00  115   690  0  815381
+1   10.255.239.1            Tu0                      41 1d22h     110   660  0  818239
+EIGRP-IPv4 Neighbors for AS(222)
+H   Address                 Interface              Hold Uptime   SRTT   RTO  Q  Seq
+                                                   (sec)         (ms)       Cnt Num
+1   10.255.237.2            Tu1                      42 2w0d       20   132  0  221686
+0   10.255.237.1            Tu1                      43 2w0d       14   132  0  1400390
+EIGRP-IPv4 Neighbors for AS(500)
+H   Address                 Interface              Hold Uptime   SRTT   RTO  Q  Seq
+                                                   (sec)         (ms)       Cnt Num
+ --More--         
+amersp-mjt01-24554703>
+amersp-mjt01-24554703>show conf | i ip route
+track 2 ip route 206.112.194.64 255.255.255.192 reachability
+track 3 ip route 206.112.202.64 255.255.255.192 reachability
+ip route 10.6.0.0 255.255.0.0 GigabitEthernet0/0.201 192.168.0.10 tag 997 name NAS_remote_cluster track 700
+ip route 10.20.0.0 255.255.0.0 GigabitEthernet0/0.201 192.168.0.10 tag 998 name MJT_local
+ip route 50.225.56.18 255.255.255.255 GigabitEthernet0/1 50.234.60.105 tag 999 name AMSP-ENV01-CPE
+ip route 50.235.43.34 255.255.255.255 GigabitEthernet0/1 50.234.60.105 tag 999 name AMSP-LAV01-CPE
+ip route 107.0.44.66 255.255.255.255 GigabitEthernet0/1 50.234.60.105 tag 999 name AMSP-NAS01-CPE
+ip route 141.175.253.33 255.255.255.255 GigabitEthernet0/1 50.234.60.105 tag 999 name DMVPN_hub_ncy01
+ip route 141.175.253.34 255.255.255.255 GigabitEthernet0/1 50.234.60.105 tag 999 name DMVPN_hub_ncy02
+ip route 188.177.66.194 255.255.255.255 GigabitEthernet0/1 50.234.60.105 tag 999 name AMSP-AAL01-CPE
+ip route 194.197.8.246 255.255.255.255 GigabitEthernet0/1 50.234.60.105 tag 999 name DMVPN_hub_vaa01
+ip route 195.190.2.151 255.255.255.255 GigabitEthernet0/1 50.234.60.105 tag 999 name DMVPN_hub_eip01
+ip route 195.190.2.152 255.255.255.255 GigabitEthernet0/1 50.234.60.105 tag 999 name DMVPN_hub_eip02
+ --More--         amersp-mjt01-24554703>
+amersp-mjt01-24554703>show version
+Cisco IOS Software, C1900 Software (C1900-UNIVERSALK9-M), Version 15.2(4)M7, RELEASE SOFTWARE (fc2)
+Technical Support: http://www.cisco.com/techsupport
+Copyright (c) 1986-2014 by Cisco Systems, Inc.
+Compiled Thu 25-Sep-14 07:30 by prod_rel_team
+
+ROM: System Bootstrap, Version 15.0(1r)M15, RELEASE SOFTWARE (fc1)
+
+amersp-mjt01-24554703 uptime is 2 weeks, 21 hours, 1 minute
+System returned to ROM by reload at 11:05:39 GMT Tue Jun 23 2020
+System restarted at 11:07:13 GMT Tue Jun 23 2020
+System image file is "flash0:c1900-universalk9-mz.SPA.152-4.M7.bin"
+Last reload type: Normal Reload
+Last reload reason: Reload Command
+
+
+
+This product contains cryptographic features and is subject to United
+States and local country laws governing import, export, transfer and
+use. Delivery of Cisco cryptographic products does not imply
+third-party authority to import, export, distribute or use encryption.
+Importers, exporters, distributors and users are responsible for
+compliance with U.S. and local country laws. By using this product you
+ --More--         
+amersp-mjt01-24554703>
+amersp-mjt01-24554703>exit
+
+========================================================================================================================

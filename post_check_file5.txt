@@ -1,0 +1,120 @@
+
+***** TELNET connection to 10.255.228.209 ***** 
+ 
+Authentication succeeded. Your password will expire in 3 weeks + 2 hours  + 7 Minutes  
+
+amersp-oge01-14008183>show ip interface brief
+Interface              IP-Address      OK? Method Status                Protocol
+GigabitEthernet0/0/0   199.220.88.154  YES NVRAM  up                    up      
+GigabitEthernet0/0/1   50.235.118.66   YES manual up                    up      
+GigabitEthernet0/1/0   unassigned      YES unset  up                    up      
+GigabitEthernet0/1/1   unassigned      YES unset  down                  down    
+GigabitEthernet0/1/2   unassigned      YES unset  down                  down    
+GigabitEthernet0/1/3   unassigned      YES unset  down                  down    
+GigabitEthernet0       unassigned      YES NVRAM  administratively down down    
+Loopback0              10.255.228.209  YES NVRAM  up                    up      
+Tunnel0                10.255.239.165  YES NVRAM  up                    up      
+Tunnel1                10.255.237.165  YES NVRAM  up                    up      
+Vlan1                  10.25.4.3       YES NVRAM  up                    up      
+amersp-oge01-14008183>!
+amersp-oge01-14008183>show inter des
+Interface                      Status         Protocol Description
+Gi0/0/0                        up             up       Verizon Business MPLS Circuit; VPN: AmerSports; SITE: ogden-ut_w1c46903-5790371; Speed 10000 Mb/s
+Gi0/0/1                        up             up       AMERSPORTS INTERNET ; Comcast ; Speed 100/100 Mbps (up/down)
+Gi0/1/0                        up             up       AMERSPORTS LAN
+Gi0/1/1                        down           down     
+Gi0/1/2                        down           down     
+Gi0/1/3                        down           down     
+Gi0                            admin down     down     
+Lo0                            up             up       Verizon Management Interface
+Tu0                            up             up       DMVPN Cloud 1 Spoke
+Tu1                            up             up       DMVPN Cloud 2 Spoke
+Vl1                            up             up       AMERSPORTS LAN
+amersp-oge01-14008183>!
+amersp-oge01-14008183>show dmvpn
+Legend: Attrb --> S - Static, D - Dynamic, I - Incomplete
+	N - NATed, L - Local, X - No Socket
+	T1 - Route Installed, T2 - Nexthop-override
+	C - CTS Capable
+	# Ent --> Number of NHRP entries with same NBMA peer
+	NHS Status: E --> Expecting Replies, R --> Responding, W --> Waiting
+	UpDn Time --> Up or Down Time for a Tunnel
+==========================================================================
+
+Interface: Tunnel0, IPv4 NHRP Details 
+Type:Spoke, NHRP Peers:5, 
+
+ # Ent  Peer NBMA Addr Peer Tunnel Add State  UpDn Tm Attrb
+ ----- --------------- --------------- ----- -------- -----
+     1 141.175.253.33     10.255.239.1    UP 00:02:29     S
+     1 141.175.253.34     10.255.239.2    UP 00:02:29     S
+     1 195.190.2.151      10.255.239.3    UP 00:02:05     D
+     1 195.190.2.152      10.255.239.4    UP 00:01:56     D
+     1 113.43.210.43    10.255.239.175    UP 00:02:17     D
+
+Interface: Tunnel1, IPv4 NHRP Details 
+Type:Spoke, NHRP Peers:14, 
+
+ --More--         
+amersp-oge01-14008183>
+amersp-oge01-14008183>show ip eigrp topology su
+EIGRP-IPv4 Topology Table Summary for AS(220)/ID(10.255.228.209)
+  Head serial 1, next serial 232044
+  99 routes, 0 pending replies, 0 dummies
+  Enabled on 1 interfaces, 2 neighbors present on 1 interfaces
+  Quiescent interfaces: 
+    Tu0
+EIGRP-IPv4 Topology Table Summary for AS(222)/ID(10.255.228.209)
+  Head serial 1, next serial 287779
+  482 routes, 0 pending replies, 0 dummies
+  Enabled on 1 interfaces, 2 neighbors present on 1 interfaces
+  Quiescent interfaces: 
+    Tu1
+amersp-oge01-14008183>!
+amersp-oge01-14008183>show ip eigrp neighbors
+EIGRP-IPv4 Neighbors for AS(220)
+H   Address                 Interface              Hold Uptime   SRTT   RTO  Q  Seq
+                                                   (sec)         (ms)       Cnt Num
+1   10.255.239.2            Tu0                      43 00:02:27  156   936  0  827265
+0   10.255.239.1            Tu0                      40 00:02:27  155   930  0  829438
+EIGRP-IPv4 Neighbors for AS(222)
+H   Address                 Interface              Hold Uptime   SRTT   RTO  Q  Seq
+                                                   (sec)         (ms)       Cnt Num
+1   10.255.237.2            Tu1                      41 00:02:30   58   348  0  238315
+0   10.255.237.1            Tu1                      43 00:02:30   39   234  0  1414721
+amersp-oge01-14008183>!
+amersp-oge01-14008183>show conf | i ip route
+track 2 ip route 206.112.194.64 255.255.255.192 reachability
+track 3 ip route 206.112.202.64 255.255.255.192 reachability
+ip route 10.25.0.0 255.255.128.0 Vlan1 10.25.4.1 tag 998
+ip route 195.190.2.151 255.255.255.255 GigabitEthernet0/0/1 50.235.118.65 tag 999 name Zscaler_next_hop
+ip route vrf INET 0.0.0.0 0.0.0.0 GigabitEthernet0/0/1 50.235.118.65
+amersp-oge01-14008183>!
+amersp-oge01-14008183>show version
+Cisco IOS XE Software, Version 03.16.07b.S - Extended Support Release
+Cisco IOS Software, ISR Software (X86_64_LINUX_IOSD-UNIVERSALK9-M), Version 15.5(3)S7b, RELEASE SOFTWARE (fc1)
+Technical Support: http://www.cisco.com/techsupport
+Copyright (c) 1986-2018 by Cisco Systems, Inc.
+Compiled Fri 02-Mar-18 08:29 by mcpre
+
+
+Cisco IOS-XE software, Copyright (c) 2005-2018 by cisco Systems, Inc.
+All rights reserved.  Certain components of Cisco IOS-XE software are
+licensed under the GNU General Public License ("GPL") Version 2.0.  The
+software code licensed under GPL Version 2.0 is free software that comes
+with ABSOLUTELY NO WARRANTY.  You can redistribute and/or modify such
+GPL code under the terms of GPL Version 2.0.  For more details, see the
+documentation or "License Notice" file accompanying the IOS-XE software,
+or the applicable URL provided on the flyer accompanying the IOS-XE
+software.
+
+
+ROM: IOS-XE ROMMON
+
+amersp-oge01-14008183 uptime is 1 year, 51 weeks, 5 days, 23 hours, 6 minutes
+Uptime for this control processor is 1 year, 51 weeks, 5 days, 23 hours, 7 minutes
+ --More--         
+amersp-oge01-14008183>
+amersp-oge01-14008183>exit
+
+========================================================================================================================

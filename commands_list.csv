@@ -1,1 +1,21 @@
+ter len 0
+!
+sh conf
+!
 show ip interface brief
+!
+show inter des
+!
+show dmvpn
+!
+show ip eigrp topology su
+!
+show ip eigrp neighbors
+!
+show conf | i ip route
+!
+show version
+!
+show ip route summary
+!
+show license

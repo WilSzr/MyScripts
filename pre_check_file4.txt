@@ -1,0 +1,151 @@
+
+***** SSH connection to 10.255.226.205 ***** 
+
+
+amersp-nas01-24554705>show ip interface brief
+Interface                  IP-Address      OK? Method Status                Protocol
+Embedded-Service-Engine0/0 unassigned      YES NVRAM  administratively down down    
+GigabitEthernet0/0         10.255.226.206  YES NVRAM  up                    up      
+GigabitEthernet0/0.200     192.168.1.2     YES NVRAM  up                    up      
+GigabitEthernet0/0.201     192.168.0.2     YES NVRAM  up                    up      
+GigabitEthernet0/1         107.0.44.66     YES NVRAM  up                    up      
+Serial0/0/0                unassigned      YES NVRAM  administratively down down    
+FastEthernet0/1/0          unassigned      YES unset  up                    up      
+FastEthernet0/1/1          unassigned      YES unset  administratively down down    
+FastEthernet0/1/2          unassigned      YES unset  administratively down down    
+FastEthernet0/1/3          unassigned      YES unset  administratively down down    
+Loopback0                  10.255.226.205  YES NVRAM  up                    up      
+ --More--         
+amersp-nas01-24554705>
+amersp-nas01-24554705>show inter des
+Interface                      Status         Protocol Description
+Em0/0                          admin down     down     
+Gi0/0                          up             up       
+Gi0/0.200                      up             up       back-to-back connection
+Gi0/0.201                      up             up       AMERSPORTS LAN
+Gi0/1                          up             up       AMERSPORTS INTERNET ; Speed 30000/30000 Kbps (up/down
+Se0/0/0                        admin down     down     UNUSED
+Fa0/1/0                        up             up       Verizon Business MPLS Circuit; VPN: AmerSports; SITE: nashville-tn_c0156032-287150021-6017431; Speed 4000 Kb/s
+Fa0/1/1                        admin down     down     UNUSED
+Fa0/1/2                        admin down     down     UNUSED
+Fa0/1/3                        admin down     down     UNUSED
+Lo0                            up             up       Verizon Management Interface
+NV0                            up             up       
+Tu0                            up             up       DMVPN Cloud 1 Spoke
+Tu1                            up             up       DMVPN Cloud 2 Spoke
+Vl1                            up             up       UNUSED
+Vl16                           up             up       Verizon Business MPLS Circuit; VPN: AmerSports; SITE: nashville-tn_c0156032-287150021-6017431; Speed 4000 Kb/s
+amersp-nas01-24554705>!
+amersp-nas01-24554705>show dmvpn
+Legend: Attrb --> S - Static, D - Dynamic, I - Incomplete
+	N - NATed, L - Local, X - No Socket
+	T1 - Route Installed, T2 - Nexthop-override
+	C - CTS Capable, I2 - Temporary
+	# Ent --> Number of NHRP entries with same NBMA peer
+	NHS Status: E --> Expecting Replies, R --> Responding, W --> Waiting
+	UpDn Time --> Up or Down Time for a Tunnel
+==========================================================================
+
+Interface: Tunnel0, IPv4 NHRP Details 
+Type:Spoke, NHRP Peers:59, 
+
+ # Ent  Peer NBMA Addr Peer Tunnel Add State  UpDn Tm Attrb
+ ----- --------------- --------------- ----- -------- -----
+     1 141.175.253.33     10.255.239.1    UP    4d00h     S
+     1 141.175.253.34     10.255.239.2    UP 20:18:07     S
+     1 195.190.2.151      10.255.239.3    UP 00:40:42     D
+     1 195.190.2.152      10.255.239.4    UP 00:40:20     D
+     1 81.144.181.210    10.255.239.12    UP    14w4d    DX
+     1 82.166.199.69     10.255.239.14    UP    22w6d    DX
+     1 218.255.85.226    10.255.239.15    UP     7w0d    DX
+     1 203.41.168.181    10.255.239.16    UP    10w6d    DX
+     1 69.172.77.38      10.255.239.19    UP     9w0d    DX
+     1 78.9.189.170      10.255.239.21    UP    32w5d    DX
+     1 210.83.228.218    10.255.239.22    UP    32w6d    DX
+     1 82.142.118.122    10.255.239.29    UP    19w6d    DX
+     1 81.128.165.50     10.255.239.30    UP    31w5d    DX
+     1 195.57.164.26     10.255.239.31    UP     3w0d    DX
+     1 193.85.227.204    10.255.239.32    UP    28w6d    DX
+     1 193.212.79.130    10.255.239.33    UP    22w5d    DX
+     1 88.116.41.210     10.255.239.34    UP    4d22h    DX
+ --More--         
+amersp-nas01-24554705>
+amersp-nas01-24554705>show ip eigrp topology su
+EIGRP-IPv4 Topology Table Summary for AS(220)/ID(10.255.226.205)
+  Head serial 1, next serial 124511
+  128 routes, 0 pending replies, 0 dummies
+  Enabled on 1 interfaces, 2 neighbors present on 1 interfaces
+  Quiescent interfaces: 
+    Tu0
+EIGRP-IPv4 Topology Table Summary for AS(222)/ID(10.255.226.205)
+  Head serial 1, next serial 181728
+  493 routes, 0 pending replies, 0 dummies
+  Enabled on 1 interfaces, 2 neighbors present on 1 interfaces
+  Quiescent interfaces: 
+    Tu1
+EIGRP-IPv4 Topology Table Summary for AS(500)/ID(10.255.226.205)
+  Head serial 1, next serial 281338
+  587 routes, 0 pending replies, 0 dummies
+  Enabled on 1 interfaces, 1 neighbors present on 1 interfaces
+  Quiescent interfaces: 
+    Gi0/0.200
+amersp-nas01-24554705>!
+amersp-nas01-24554705>show ip eigrp neighbors
+EIGRP-IPv4 Neighbors for AS(220)
+H   Address                 Interface              Hold Uptime   SRTT   RTO  Q  Seq
+                                                   (sec)         (ms)       Cnt Num
+1   10.255.239.2            Tu0                      41 5d10h     120   720  0  815482
+0   10.255.239.1            Tu0                      41 5d10h     120   720  0  818335
+EIGRP-IPv4 Neighbors for AS(222)
+H   Address                 Interface              Hold Uptime   SRTT   RTO  Q  Seq
+                                                   (sec)         (ms)       Cnt Num
+0   10.255.237.2            Tu1                      44 6w2d       20   132  0  222163
+1   10.255.237.1            Tu1                      43 8w6d       11   132  0  1400887
+EIGRP-IPv4 Neighbors for AS(500)
+H   Address                 Interface              Hold Uptime   SRTT   RTO  Q  Seq
+                                                   (sec)         (ms)       Cnt Num
+ --More--         
+amersp-nas01-24554705>
+amersp-nas01-24554705>show conf | i ip route
+track 2 ip route 206.112.194.64 255.255.255.192 reachability
+track 3 ip route 206.112.202.64 255.255.255.192 reachability
+ ip route-cache policy
+ip route 10.20.0.0 255.255.0.0 GigabitEthernet0/0.201 192.168.0.11 tag 997 name MJT_remote_cluster track 700
+ip route 10.6.0.0 255.255.0.0 GigabitEthernet0/0.201 192.168.0.11 tag 998 name NAS_local
+ip route 50.202.214.210 255.255.255.255 GigabitEthernet0/1 107.0.44.65 tag 999 name DMVPN_hub_sch01
+ip route 50.225.56.18 255.255.255.255 GigabitEthernet0/1 107.0.44.65 tag 999 name AMSP-ENV01-CPE
+ip route 50.234.60.106 255.255.255.255 GigabitEthernet0/1 107.0.44.65 tag 999 name AMSP-MJT01-CPE
+ip route 50.235.43.34 255.255.255.255 GigabitEthernet0/1 107.0.44.65 tag 999 name AMSP-LAV01-CPE
+ip route 141.175.253.33 255.255.255.255 GigabitEthernet0/1 107.0.44.65 tag 999 name DMVPN_hub_ncy01
+ip route 141.175.253.34 255.255.255.255 GigabitEthernet0/1 107.0.44.65 tag 999 name DMVPN_hub_ncy02
+ip route 188.177.66.194 255.255.255.255 GigabitEthernet0/1 107.0.44.65 tag 999 name AMSP-AAL01-CPE
+ip route 194.197.8.246 255.255.255.255 GigabitEthernet0/1 107.0.44.65 tag 999 name DMVPN_hub_vaa01
+ --More--         amersp-nas01-24554705>
+amersp-nas01-24554705>show version
+Cisco IOS Software, C1900 Software (C1900-UNIVERSALK9-M), Version 15.7(3)M4a, RELEASE SOFTWARE (fc1)
+Technical Support: http://www.cisco.com/techsupport
+Copyright (c) 1986-2019 by Cisco Systems, Inc.
+Compiled Mon 25-Mar-19 03:45 by prod_rel_team
+
+ROM: System Bootstrap, Version 15.0(1r)M16, RELEASE SOFTWARE (fc1)
+
+amersp-nas01-24554705 uptime is 46 weeks, 6 days, 1 hour, 41 minutes
+System returned to ROM by reload at 06:53:14 GMT Thu Aug 15 2019
+System restarted at 06:55:08 GMT Thu Aug 15 2019
+System image file is "flash:c1900-universalk9-mz.SPA.157-3.M4a.bin"
+Last reload type: Normal Reload
+Last reload reason: Reload Command
+
+
+
+This product contains cryptographic features and is subject to United
+States and local country laws governing import, export, transfer and
+use. Delivery of Cisco cryptographic products does not imply
+third-party authority to import, export, distribute or use encryption.
+Importers, exporters, distributors and users are responsible for
+compliance with U.S. and local country laws. By using this product you
+ --More--         
+amersp-nas01-24554705>
+amersp-nas01-24554705>exit
+
+========================================================================================================================

@@ -7,6 +7,7 @@ import os
 import time
 from telnet_func import telnet_vz
 from ssh_func import ssh_vz
+import getpass
 
 
 with open ('just_ip_cat2.csv','rb') as t:
@@ -21,7 +22,7 @@ with open('commands_list.csv','rb') as cm:
 
 cmd_list = list(itertools.chain(*cms))
 
-output_text = 'pre_check_file.txt'
+output_text = 'pre_check_scn01.txt'
 
 print flat_list 
 print '\n'

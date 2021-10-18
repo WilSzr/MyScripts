@@ -1,0 +1,126 @@
+
+***** TELNET connection to 10.255.228.68 ***** 
+ 
+Authentication succeeded. Your password will expire in 3 weeks + 2 hours  + 50 Minutes  
+
+amersp-ren01-3388595>show ip interface brief
+Interface                  IP-Address      OK? Method Status                Protocol
+Embedded-Service-Engine0/0 unassigned      YES NVRAM  administratively down down    
+GigabitEthernet0/0         10.10.4.1       YES NVRAM  up                    up      
+GigabitEthernet0/1         64.42.26.146    YES NVRAM  up                    up      
+Serial0/0/0                unassigned      YES NVRAM  up                    up      
+Serial0/1/0                unassigned      YES NVRAM  up                    up      
+Loopback0                  10.255.228.68   YES NVRAM  up                    up      
+MFR1                       unassigned      YES unset  up                    up      
+MFR1.100                   152.176.164.154 YES NVRAM  up                    up      
+NVI0                       10.10.4.1       YES unset  up                    up      
+Tunnel0                    10.255.239.132  YES NVRAM  up                    up      
+Tunnel1                    10.255.237.132  YES NVRAM  up                    up      
+amersp-ren01-3388595>!
+amersp-ren01-3388595>show inter des
+Interface                      Status         Protocol Description
+Em0/0                          admin down     down     
+Gi0/0                          up             up       AMERSPORTS LAN
+Gi0/1                          up             up       AMERSPORTS INTERNET ; Speed 12000/12000 Kbps (up/down)
+Se0/0/0                        up             up       W1B04636
+Se0/1/0                        up             up       W1B04637
+Lo0                            up             up       Verizon Management Interface
+MF1                            up             up       Verizon MPLS VPN: AmerSports; Site-Circuit: sparks-nv_w1b04638-5460696
+MF1.100                        up             up       Verizon Business MPLS Circuit; VPN: AmerSports; SITE: sparks-nv_w1b04638-5460696; Speed 3072 Kbps
+NV0                            up             up       
+Tu0                            up             up       DMVPN Cloud 1 Spoke
+Tu1                            up             up       DMVPN Cloud 2 Spoke
+amersp-ren01-3388595>!
+amersp-ren01-3388595>show dmvpn
+Legend: Attrb --> S - Static, D - Dynamic, I - Incomplete
+	N - NATed, L - Local, X - No Socket
+	T1 - Route Installed, T2 - Nexthop-override
+	C - CTS Capable, I2 - Temporary
+	# Ent --> Number of NHRP entries with same NBMA peer
+	NHS Status: E --> Expecting Replies, R --> Responding, W --> Waiting
+	UpDn Time --> Up or Down Time for a Tunnel
+==========================================================================
+
+Interface: Tunnel0, IPv4 NHRP Details 
+Type:Spoke, NHRP Peers:53, 
+
+ # Ent  Peer NBMA Addr Peer Tunnel Add State  UpDn Tm Attrb
+ ----- --------------- --------------- ----- -------- -----
+     1 141.175.253.33     10.255.239.1    UP 02:07:26     S
+     1 141.175.253.34     10.255.239.2    UP 02:07:24     S
+     1 195.190.2.151      10.255.239.3    UP 00:48:09     D
+     1 195.190.2.152      10.255.239.4    UP 00:01:09     D
+     1 81.144.181.210    10.255.239.12    UP     5w6d    DX
+     1 218.255.85.226    10.255.239.15    UP     1w0d    DX
+     1 203.41.168.181    10.255.239.16    UP    12w5d    DX
+     1 210.242.142.125   10.255.239.18    UP    21w0d    DX
+     1 69.172.77.38      10.255.239.19    UP 00:17:19    DX
+ --More--         
+amersp-ren01-3388595>
+amersp-ren01-3388595>show ip eigrp topology su
+EIGRP-IPv4 Topology Table Summary for AS(220)/ID(10.255.228.68)
+  Head serial 1, next serial 39880
+  110 routes, 0 pending replies, 0 dummies
+  Enabled on 1 interfaces, 2 neighbors present on 1 interfaces
+  Quiescent interfaces: 
+    Tu0
+EIGRP-IPv4 Topology Table Summary for AS(222)/ID(10.255.228.68)
+  Head serial 1, next serial 78076
+  485 routes, 0 pending replies, 0 dummies
+  Enabled on 1 interfaces, 2 neighbors present on 1 interfaces
+  Quiescent interfaces: 
+    Tu1
+amersp-ren01-3388595>!
+amersp-ren01-3388595>show ip eigrp neighbors
+EIGRP-IPv4 Neighbors for AS(220)
+H   Address                 Interface              Hold Uptime   SRTT   RTO  Q  Seq
+                                                   (sec)         (ms)       Cnt Num
+1   10.255.239.2            Tu0                      44 02:07:22  156   936  0  827226
+0   10.255.239.1            Tu0                      44 02:07:27  158   948  0  829396
+EIGRP-IPv4 Neighbors for AS(222)
+H   Address                 Interface              Hold Uptime   SRTT   RTO  Q  Seq
+                                                   (sec)         (ms)       Cnt Num
+1   10.255.237.1            Tu1                      41 02:06:23   55   330  0  1414576
+0   10.255.237.2            Tu1                      41 02:08:18   60   360  0  238192
+amersp-ren01-3388595>!
+amersp-ren01-3388595>show conf | i ip route
+track 2 ip route 206.112.194.64 255.255.255.192 reachability
+track 3 ip route 206.112.202.64 255.255.255.192 reachability
+ip route 10.10.16.0 255.255.240.0 GigabitEthernet0/0 10.10.4.3 tag 998
+ip route 10.10.64.0 255.255.255.0 GigabitEthernet0/0 10.10.4.3 tag 998
+ip route 50.202.214.210 255.255.255.255 GigabitEthernet0/1 64.42.26.145 tag 999 name DMVPN_hub_sch01
+ip route 141.175.253.33 255.255.255.255 GigabitEthernet0/1 64.42.26.145 tag 999 name DMVPN_hub_ncy01
+ip route 141.175.253.34 255.255.255.255 GigabitEthernet0/1 64.42.26.145 tag 999 name DMVPN_hub_ncy02
+ip route 194.197.8.246 255.255.255.255 GigabitEthernet0/1 64.42.26.145 tag 999 name DMVPN_hub_vaa01
+ip route 195.190.2.151 255.255.255.255 GigabitEthernet0/1 64.42.26.145 tag 999 name DMVPN_hub_eip01
+ip route 195.190.2.152 255.255.255.255 GigabitEthernet0/1 64.42.26.145 tag 999 name DMVPN_hub_eip02
+ip route 198.184.220.252 255.255.255.255 GigabitEthernet0/1 64.42.26.145 tag 999 name DMVPN_hub_chi01
+amersp-ren01-3388595>!
+amersp-ren01-3388595>show version
+Cisco IOS Software, C1900 Software (C1900-UNIVERSALK9-M), Version 15.7(3)M4a, RELEASE SOFTWARE (fc1)
+Technical Support: http://www.cisco.com/techsupport
+Copyright (c) 1986-2019 by Cisco Systems, Inc.
+Compiled Mon 25-Mar-19 03:45 by prod_rel_team
+
+ROM: System Bootstrap, Version 15.0(1r)M16, RELEASE SOFTWARE (fc1)
+
+amersp-ren01-3388595 uptime is 25 weeks, 5 days, 8 hours, 57 minutes
+System returned to ROM by power-on
+System restarted at 22:34:59 GMT Thu Jan 16 2020
+System image file is "flash:c1900-universalk9-mz.SPA.157-3.M4a.bin"
+Last reload type: Normal Reload
+Last reload reason: power-on
+
+
+
+This product contains cryptographic features and is subject to United
+States and local country laws governing import, export, transfer and
+use. Delivery of Cisco cryptographic products does not imply
+third-party authority to import, export, distribute or use encryption.
+Importers, exporters, distributors and users are responsible for
+compliance with U.S. and local country laws. By using this product you
+ --More--         
+amersp-ren01-3388595>
+amersp-ren01-3388595>exit
+
+========================================================================================================================
